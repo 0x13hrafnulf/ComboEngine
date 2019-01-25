@@ -12,6 +12,9 @@ SET(_glm_HEADER_SEARCH_DIRS
     "${CMAKE_CURRENT_SOURCE_DIR}/deps/glm"
     "/usr/include"
     "/usr/local/include"
+    "/opt"
+    "/Library/Frameworks"
+	"~/Library/Frameworks"
     )
 
 # check environment variable

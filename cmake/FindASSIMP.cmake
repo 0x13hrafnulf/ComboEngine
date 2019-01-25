@@ -1,72 +1,59 @@
-# Copyright (C) 2014 Barry Deeney
-# Copyright (C) 2014 Benny Bobaganoosh
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 
-#############################################
-# Try to find ASSMIP and set the following: #
-#                                           #
-# ASSIMP_FOUND                              #
-# ASSIMP_INCLUDE_DIRS                       #
-# ASSIMP_LIBRARIES                          #
-#############################################
+# Sets the following variables
 
-SET(_PF86 "PROGRAMFILES(X86)")
-SET( ASSIMP_SEARCH_PATHS
-	${ASSIMP_ROOT_DIR}					# ASSIMP!
-	./lib/Assimp
-	$ENV{PROGRAMFILES}/ASSIMP			# WINDOWS
-	"$ENV{_PF86}/ASSIMP"	# WINDOWS
-	~/Library/Frameworks				# MAC
-	/Library/Frameworks					# MAC
-	/usr/local							# LINUX/MAC/UNIX
-	/usr								# LINUX/MAC/UNIX
-	/opt								# LINUX/MAC/UNIX
-	/sw									# Fink
-	/opt/local							# DarwinPorts
-	/opt/csw							# Blastwave
+# ASSIMP_INCLUDE_DIRS - include directories for ASSIMP
+# ASSIMP_LIBRARIES - libraries to link against ASSIMP
+# ASSIMP_FOUND - true if ASSIMP has been found and can be used
+SET(ASSIMP_FOUND "NO")
+
+# default search dirs
+SET(_assimp_SEARCH_DIRS
+    "${CMAKE_CURRENT_SOURCE_DIR}/deps/include"
+	"${CMAKE_CURRENT_SOURCE_DIR}/deps/assimp"
+	"/usr/include"
+	"/usr"
+	"/usr/local/include"
+	"/opt"
+	"/Library/Frameworks"
+	"~/Library/Frameworks"
+    )
+
+# check environment variable
+SET(_assimp_ENV_ROOT_DIR "$ENV{ASSIMP_ROOT_DIR}")
+
+# set ASSIMP ROOT if needed
+IF(NOT ASSIMP_ROOT_DIR AND _assimp_ENV_ROOT_DIR)
+    SET(ASSIMP_ROOT_DIR "${_assimp_ENV_ROOT_DIR}")
+ENDIF(NOT ASSIMP_ROOT_DIR AND _assimp_ENV_ROOT_DIR)
+
+IF(ASSIMP_ROOT_DIR)
+    SET(_assimp_HEADER_SEARCH_DIRS "${ASSIMP_ROOT_DIR}"
+                                "${ASSIMP_ROOT_DIR}/include"
+                                 ${_assimp_SEARCH_DIRS})
+ENDIF(ASSIMP_ROOT_DIR)
+
+
+FIND_PATH(ASSIMP_INCLUDE_DIRS
+		assimp/config.h
+		${_assimp_SEARCH_DIRS}/include 
+		DOC "ASSIMP include directory"
 )
 
-FIND_PATH( ASSIMP_INCLUDE_DIRS
-	NAMES
-		assimp/mesh.h
-	PATHS
-		${ASSIMP_SEARCH_PATHS}
-	PATH_SUFFIXES
-		include
-	DOC
-		"The directory where assimp/mesh.h resides"
-)
-
-FIND_LIBRARY( ASSIMP_LIBRARIES
-	NAMES
-		assimp ASSIMP
-	PATHS
-		${ASSIMP_SEARCH_PATHS}
+FIND_LIBRARY(ASSIMP_LIBRARIES
+	NAMES	assimp ASSIMP
+	PATHS	${_assimp_SEARCH_DIRS}
 	PATH_SUFFIXES
 		lib
 		lib64
 		lib/x86
 		lib/x64
-	DOC
-		"The ASSIMP library"
+	DOC "ASSIMP library"
 )
 
-# Check if we found it!
-IF ( ASSIMP_INCLUDE_DIRS AND ASSIMP_LIBRARIES )
-	SET( ASSIMP_FOUND TRUE )
-	MESSAGE(STATUS "Looking for ASSIMP - found")
+IF (ASSIMP_INCLUDE_DIRS AND ASSIMP_LIBRARIES )
+	SET(ASSIMP_FOUND TRUE )
+	MESSAGE(STATUS "ASSIMP_INCLUDE_DIRS = ${ASSIMP_INCLUDE_DIRS}")
 ELSE ( ASSIMP_INCLUDE_DIRS AND ASSIMP_LIBRARIES )
 	SET( ASSIMP_FOUND FALSE )
-	MESSAGE(STATUS "Looking for ASSIMP - not found")
+	MESSAGE(STATUS "ASSIMP not found")
 ENDIF ( ASSIMP_INCLUDE_DIRS AND ASSIMP_LIBRARIES )
