@@ -28,7 +28,7 @@ ENDIF(NOT ASSIMP_ROOT_DIR AND _assimp_ENV_ROOT_DIR)
 
 IF(ASSIMP_ROOT_DIR)
     SET(_assimp_HEADER_SEARCH_DIRS "${ASSIMP_ROOT_DIR}"
-                                "${ASSIMP_ROOT_DIR}/include"
+                                "${ASSIMP_ROOT_DIR}"
                                  ${_assimp_SEARCH_DIRS})
 ENDIF(ASSIMP_ROOT_DIR)
 

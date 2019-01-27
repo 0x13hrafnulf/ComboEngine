@@ -1,7 +1,6 @@
 # Sets the following variables
 
 # GLM_INCLUDE_DIRS - include directories for GLM
-# GLM_LIBRARIES - libraries to link against GLM
 # GLM_FOUND - true if GLM has been found and can be used
 
 SET(GLM_FOUND "NO")
@@ -11,7 +10,8 @@ SET(_glm_SEARCH_DIRS
     "${CMAKE_CURRENT_SOURCE_DIR}/libs/include"
     "${CMAKE_CURRENT_SOURCE_DIR}/libs/glm"
     "/usr/include"
-	"/usr"
+    "/usr"
+    "/usr/local"
 	"/usr/local/include"
 	"/opt"
 	"/Library/Frameworks"
@@ -28,25 +28,20 @@ ENDIF(NOT GLM_ROOT_DIR AND _glm_ENV_ROOT_DIR)
 
 IF(GLM_ROOT_DIR)
     SET(_glm_SEARCH_DIRS "${GLM_ROOT_DIR}"
-                                "${GLM_ROOT_DIR}/include"
+                                "${GLM_ROOT_DIR}"
                                  ${_glm_SEARCH_DIRS})
 ENDIF(GLM_ROOT_DIR)
 
-FIND_PATH(GLM_INCLUDE_DIR "glm/glm.hpp"
-    PATHS ${_glm_SEARCH_DIRS})
+FIND_PATH(GLM_INCLUDE_DIRS
+		glm/glm.hpp
+		${_glm_SEARCH_DIRS}/include 
+		DOC "GLM include directory"
+)
 
-message(STATUS "glm.hpp: ${GLM_INCLUDE_DIR}")
-
-IF (GLM_INCLUDE_PATH AND GLM_LIBRARY)
-    SET(GLM_LIBRARIES ${GLM_LIBRARY})
-    SET(GLM_FOUND "YES")
-ENDIF (GLM_INCLUDE_PATH AND GLM_LIBRARY)
-
-IF(NOT GLM_FOUND)
-    MESSAGE(STATUS "GLM not found")
-ENDIF(NOT GLM_FOUND)
-
-IF(GLM_FOUND)
-    SET(GLM_INCLUDE_DIRS "${GLM_INCLUDE_DIR}")
-    MESSAGE(STATUS "GLM_INCLUDE_DIR = ${GLM_INCLUDE_DIR}")
-ENDIF(GLM_FOUND)
+IF (GLM_INCLUDE_DIRS )
+	SET(GLM_FOUND TRUE)
+	MESSAGE(STATUS "GLM_INCLUDE_DIRS = ${GLM_INCLUDE_DIRS}")
+ELSE ( GLM_INCLUDE_DIRS )
+	SET( GLM_FOUND FALSE)
+	MESSAGE(STATUS "GLM not found")
+ENDIF ( GLM_INCLUDE_DIRS )
