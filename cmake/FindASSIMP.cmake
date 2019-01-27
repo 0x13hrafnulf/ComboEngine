@@ -8,8 +8,8 @@ SET(ASSIMP_FOUND "NO")
 
 # default search dirs
 SET(_assimp_SEARCH_DIRS
-    "${CMAKE_CURRENT_SOURCE_DIR}/deps/include"
-	"${CMAKE_CURRENT_SOURCE_DIR}/deps/assimp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/libs/include"
+	"${CMAKE_CURRENT_SOURCE_DIR}/libs/assimp"
 	"/usr/include"
 	"/usr"
 	"/usr/local/include"

@@ -7,11 +7,15 @@
 SET(GLEW_FOUND "NO")
 
 # default search dirs
-SET(_glew_HEADER_SEARCH_DIRS
-    "${CMAKE_CURRENT_SOURCE_DIR}/deps/include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/deps/glew"
+SET(_glew_SEARCH_DIRS
+    "${CMAKE_CURRENT_SOURCE_DIR}/libs/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/libs/glew"
     "/usr/include"
-    "/usr/local/include"
+	"/usr"
+	"/usr/local/include"
+	"/opt"
+	"/Library/Frameworks"
+	"~/Library/Frameworks"
     )
 
 # check environment variable
@@ -23,47 +27,24 @@ IF(NOT GLEW_ROOT_DIR AND _glew_ENV_ROOT_DIR)
 ENDIF(NOT GLEW_ROOT_DIR AND _glew_ENV_ROOT_DIR)
 
 IF(GLEW_ROOT_DIR)
-    SET(_glew_HEADER_SEARCH_DIRS "${GLEW_ROOT_DIR}"
+    SET(_glew_SEARCH_DIRS "${GLEW_ROOT_DIR}"
                                 "${GLEW_ROOT_DIR}/include"
-                                 ${_glew_HEADER_SEARCH_DIRS})
+                                 ${_glew_SEARCH_DIRS})
 ENDIF(GLEW_ROOT_DIR)
 
-FIND_PATH(GLEW_INCLUDE_DIR "glew/glew.hpp"
-    PATHS ${_glew_HEADER_SEARCH_DIRS})
+FIND_PATH(GLEW_INCLUDE_DIR "GL/glew.h"
+    PATHS ${_glew_SEARCH_DIRS})
 
-message(STATUS "glew.hpp: ${GLEW_INCLUDE_DIR}")
+message(STATUS "glew.h: ${GLEW_INCLUDE_DIR}")
 
 IF (GLEW_INCLUDE_PATH AND GLEW_LIBRARY)
     SET(GLEW_LIBRARIES ${GLEW_LIBRARY})
     SET(GLEW_FOUND "YES")
 ENDIF (GLEW_INCLUDE_PATH AND GLEW_LIBRARY)
 
-INCLUDE(FindPackageHandleStandardArgs)
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(GLEW DEFAULT_MSG
-    GLEW_INCLUDE_DIR)
 
 IF(NOT GLEW_FOUND)
-    # add external here
-    set(GLEW_INCLUDEDIR "${VENDOR_PREFIX}/src/glew" CACHE PATH "" FORCE)
-    # set(GLEW_INCLUDEDIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/glew")
-    list(APPEND vendor_args
-        "-DGLEW_INCLUDEDIR:PATH=${GLEW_INCLUDEDIR}")
-    INCLUDE(ExternalProject)
-    ExternalProject_Add(glew
-        PREFIX ${VENDOR_PREFIX}
-        GIT_REPOSITORY https://github.com/RegrowthStudios/glew
-        GIT_TAG 002cb71b24
-        INSTALL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/glew"
-        # UPDATE_COMMAND ""
-        # CONFIGURE_COMMAND ""
-        # BUILD_IN_SOURCE 1
-        # BUILD_COMMAND ""
-        # INSTALL_COMMAND ""
-        LOG_DOWNLOAD ON
-        LOG_INSTALL ON
-    )
-    ExternalProject_Get_Property(glew source_dir)
-    set(GLEW_INCLUDE_DIR ${source_dir}/glew)
+    MESSAGE(STATUS "GLEW not found")
 ENDIF(NOT GLEW_FOUND)
 
 IF(GLEW_FOUND)
