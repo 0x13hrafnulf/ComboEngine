@@ -19,6 +19,23 @@ void SDLWindow::CreateWindow(int width, int height, const std::string& title)
     m_title = title;
 
     m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, window_flags);
+
+    if(m_window == nullptr)
+    {
+        printf("Could not create window: %s\n", SDL_GetError());//change to std::cout
+    }
+
+    SDL_GLContext glcontext = SDL_GL_CreateContext(m_window);
+
+    GLenum error = glewInit();
+
+    glClearColor(0.0f,0.0f,1.0f,1.0f);
+
+    SDL_GL_SetSwapInterval(0);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 }
 void SDLWindow::DestroyWindow()
 {

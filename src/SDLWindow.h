@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <string>
-
+#include <GL/glew.h>
 
 class SDLWindow
 {
