@@ -22,4 +22,4 @@
 3. 3D Game Engine Architecture: Engineering Real-Time Applications with Wild Magic by David H. Eberly
 4. Path of game developer guide with recommended books: https://github.com/miloyip/game-programmer/blob/master/game-programmer.jpg
 
-Note: There are many other learning materials, do not be limited by provided list.
+Note: There are many other learning materials, do not be limited by the provided list.
