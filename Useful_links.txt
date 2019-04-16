@@ -1,0 +1,25 @@
+***Useful links***
+--------------
+***OpenGL***:
+1. https://learnopengl.com/
+2. http://www.opengl-tutorial.org/
+3. ChernoProject OpenGL series: https://www.youtube.com/watch?v=W3gAzLwfIP0&list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2
+
+***C++***:
+1. MakingGamesWithBen C++ series https://www.youtube.com/watch?v=hQ2I8D2ogrs&list=PLSPw4ASQYyynKPY0I-QFHK0iJTjnvNUys
+2. C++weekly youtube series: https://www.youtube.com/playlist?list=PLs3KjaCtOwSZ2tbuV1hx8Xz-rFZTan2J1
+3. ChernoProject C++ series: https://www.youtube.com/watch?v=18c3MTX0PK0&list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb
+
+***Game Engine Series***:
+1. MakingGamesWithBen series https://www.youtube.com/watch?v=FxCC9Ces1Yg&list=PLSPw4ASQYyymu3PfG9gxywSPghnSMiOAW
+2. ChernoProject Game Engine series: https://www.youtube.com/watch?v=JxIZbV_XjAs&list=PLlrATfBNZ98dC-V-N3m0Go4deliWHPFwT
+3. Bennybox Game Engine series https://www.youtube.com/watch?v=ss3AnSxJ2X8&list=PLEETnX-uPtBXP_B2yupUKlflXBznWIlL5
+4. There are many other Game engine development series
+
+***Books***:
+1. Game Engine Architecture by Jason Gregory 
+2. 3D Game Engine Design: A Practical Approach to Real-Time Computer Graphics by David H. Eberly 
+3. 3D Game Engine Architecture: Engineering Real-Time Applications with Wild Magic by David H. Eberly
+4. Path of game developer guide with recommended books: https://github.com/miloyip/game-programmer/blob/master/game-programmer.jpg
+
+Note: There are many other learning materials, do not be limited by provided list.
