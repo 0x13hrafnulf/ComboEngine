@@ -1,0 +1,11 @@
+apt-get install cmake
+apt-get install libsdl2-2.0-0 libsdl2-dev libsdl2-image-dev
+apt-get install libgl1-mesa-dev
+apt-get install libglew-dev libglm-dev 
+apt-get install libfreetype6 libfreetype6-dev
+apt-get install libassimp4 libassimp-dev assimp-utils
+
+Build:
+cd build
+cmake ../
+make
