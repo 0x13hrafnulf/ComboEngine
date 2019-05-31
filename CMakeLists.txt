@@ -52,13 +52,23 @@ endif(ASSIMP_FOUND)
 set(source_files
 src/main.cpp
 src/SDLWindow.cpp
-src/SDLWindow.h
+src/imgui_impl_sdl.cpp
+src/imgui_impl_opengl3.cpp
+src/imgui/imgui.cpp
+src/imgui/imgui.h
+src/imgui/imgui_demo.cpp
+src/imgui/imgui_draw.cpp
+src/imgui/imgui_internal.h
+src/imgui/imconfig.h
+src/imgui/imstb_rectpack.h
+src/imgui/imstb_textedit.h
+src/imgui/imstb_truetype.h
+src/imgui/imgui_widgets.cpp
 )
 add_executable(Combo ${source_files})
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/src
-    ${CMAKE_CURRENT_SOURCE_DIR}/libs
     ${OPENGL_INCLUDE_DIRS}
     ${GLEW_INCLUDE_DIRS}
     ${ASSIMP_INCLUDE_DIRS}
