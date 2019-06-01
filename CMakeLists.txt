@@ -51,6 +51,7 @@ endif(ASSIMP_FOUND)
 #file(GLOB_RECURSE sources ${Combo_SOURCE_DIR}/src/*.cpp)
 set(source_files
 src/main.cpp
+src/graphics_engine.h
 src/SDLWindow.cpp
 src/imgui_impl_sdl.cpp
 src/imgui_impl_opengl3.cpp
