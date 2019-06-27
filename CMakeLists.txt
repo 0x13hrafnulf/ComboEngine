@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13.2)
+cmake_minimum_required(VERSION 3.11.1)
 project(COMBO)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
@@ -21,7 +21,7 @@ endif(GLEW_FOUND)
 
 find_package(SDL2 REQUIRED)
 if(SDL2_FOUND)
-    include_directories(SYSTEM ${SDL2_INCLUDE_DIRS})
+    include_directories(SYSTEM ${SDL2_INCLUDE_DIR})
 endif(SDL2_FOUND)
 
 

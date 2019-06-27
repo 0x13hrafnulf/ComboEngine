@@ -35,7 +35,7 @@ ENDIF(ASSIMP_ROOT_DIR)
 
 
 FIND_PATH(ASSIMP_INCLUDE_DIRS
-		assimp/config.h
+		config.h include/config.h
 		${_assimp_SEARCH_DIRS}/include 
 		DOC "ASSIMP include directory"
 )

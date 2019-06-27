@@ -35,13 +35,13 @@ ENDIF(GLEW_ROOT_DIR)
 
 
 FIND_PATH(GLEW_INCLUDE_DIRS
-		GL/glew.h
-		${_glew_SEARCH_DIRS}/include 
+		GL/glew.h glew.h 
+		${_glew_SEARCH_DIRS}/include
 		DOC "GLEW include directory"
 )
 
 FIND_LIBRARY(GLEW_LIBRARIES
-	NAMES	glew GLEW
+	NAMES	glew GLEW glew32 glew32s
 	PATHS	${_glew_SEARCH_DIRS}
 	PATH_SUFFIXES
 		lib

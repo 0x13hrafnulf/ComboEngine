@@ -34,7 +34,7 @@ IF(GLM_ROOT_DIR)
 ENDIF(GLM_ROOT_DIR)
 
 FIND_PATH(GLM_INCLUDE_DIRS
-		glm/glm.hpp
+		glm.hpp glm/glm.hpp
 		${_glm_SEARCH_DIRS}/include 
 		DOC "GLM include directory"
 )
