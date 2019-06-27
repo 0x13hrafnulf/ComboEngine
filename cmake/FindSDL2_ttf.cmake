@@ -7,7 +7,7 @@
 
 
 
-SET(SDL2_TTF_SEARCH_PATHS
+SET(SDL2_TTF_SEARCH_DIRS
 	"${CMAKE_CURRENT_SOURCE_DIR}/libs/include"
 	"${CMAKE_CURRENT_SOURCE_DIR}/libs/SDL2_ttf"
 	"/usr/include"
@@ -29,7 +29,7 @@ ENDIF(NOT SDL2_TTF_ROOT_DIR AND _SDL2_TTF_ENV_ROOT_DIR)
 IF(SDL2_TTF_ROOT_DIR)
     SET(_SDL2_TTF_HEADER_SEARCH_DIRS "${SDL2_TTF_ROOT_DIR}"
                                 "${SDL2_TTF_ROOT_DIR}"
-                                 ${_SDL2_TTF_SEARCH_DIRS})
+                                 ${SDL2_TTF_SEARCH_DIRS})
 ENDIF(SDL2_TTF_ROOT_DIR)
 
 
@@ -37,13 +37,13 @@ ENDIF(SDL2_TTF_ROOT_DIR)
 FIND_PATH(SDL2_TTF_INCLUDE_DIR
 		SDL_ttf.h
 		SDL2/SDL_ttf.h
-		${_glm_SEARCH_DIRS}/include 
+		${SDL2_TTF_SEARCH_DIRS}/include 
 		DOC "SDL2_ttf include directory"
 )
 
 FIND_LIBRARY(SDL2_TTF_LIBRARY
 	NAMES	SDL2 SDL2
-	PATHS	${_SDL2_TTF_SEARCH_DIRS}
+	PATHS	${SDL2_TTF_SEARCH_DIRS}
 	PATH_SUFFIXES
 		lib
 		lib64
