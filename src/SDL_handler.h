@@ -12,6 +12,7 @@ class SDL_handler{
 private:
     SDL_Window* m_window;
     SDL_GLContext m_context;
+    Attributes* m_attributes;
 
 public:
 
@@ -24,8 +25,6 @@ public:
     ~SDL_handler();
 
     void SwapWindow();
-
-
 
     SDL_Window* GetSDLWindow()
     {
