@@ -8,6 +8,7 @@
 
 
 SET(SDL2_TTF_SEARCH_DIRS
+	"./libs/SDL2_ttf"
 	"${CMAKE_CURRENT_SOURCE_DIR}/libs/include"
 	"${CMAKE_CURRENT_SOURCE_DIR}/libs/SDL2_ttf"
 	"/usr/include"

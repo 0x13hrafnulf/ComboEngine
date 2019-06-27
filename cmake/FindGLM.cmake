@@ -7,6 +7,7 @@ SET(GLM_FOUND "NO")
 
 # default search dirs
 SET(_glm_SEARCH_DIRS
+	"./libs/glm"
     "${CMAKE_CURRENT_SOURCE_DIR}/libs/include"
     "${CMAKE_CURRENT_SOURCE_DIR}/libs/glm"
     "/usr/include"

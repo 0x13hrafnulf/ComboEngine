@@ -8,6 +8,7 @@ SET(GLEW_FOUND "NO")
 
 # default search dirs
 SET(_glew_SEARCH_DIRS
+	"./libs/glew"
     "${CMAKE_CURRENT_SOURCE_DIR}/libs/include"
     "${CMAKE_CURRENT_SOURCE_DIR}/libs/glew"
     "/usr/include"

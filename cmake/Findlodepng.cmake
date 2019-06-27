@@ -8,6 +8,7 @@ SET(LODE_PNG_FOUND "NO")
 
 # default search dirs
 SET(_lode_png_SEARCH_DIRS
+	"./libs/lodepng"
     "${CMAKE_CURRENT_SOURCE_DIR}/libs/include"
     "${CMAKE_CURRENT_SOURCE_DIR}/libs/lodepng"
     "/usr/include"

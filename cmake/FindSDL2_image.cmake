@@ -8,6 +8,7 @@
 
 
 SET(SDL2_IMAGE_SEARCH_DIRS
+	"./libs/SDL2_image"
 	"${CMAKE_CURRENT_SOURCE_DIR}/libs/include"
 	"${CMAKE_CURRENT_SOURCE_DIR}/libs/SDL2_IMAGE"
 	"/usr/include"
