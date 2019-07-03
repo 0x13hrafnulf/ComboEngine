@@ -1,3 +1,5 @@
+////Credits to BennyQBD  for this guidelines
+///Link: https://github.com/BennyQBD/
 This document details what I currently believe is an efficient coding style for C/C++, and is also
 the coding style I use in my projects. The purpose of this document is to inform you of this, both
 so that you may consider your own coding style, and so any code contributed to the project can be
