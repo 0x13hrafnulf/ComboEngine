@@ -1,12 +1,15 @@
-cmake_minimum_required(VERSION 3.11.1)
+cmake_minimum_required(VERSION 3.3)
 project(COMBO)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/"; 
+"${CMAKE_SOURCE_DIR}/libs/") 
+#include(${CMAKE_SOURCE_DIR}/libs/CMakeLists.txt)
+
 
 if(WIN32)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -mconsole -Wall -Wextra -Wnon-virtual-dtor -pedantic")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
 else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
 endif()
 
 find_package(OpenGL REQUIRED)
@@ -49,23 +52,13 @@ endif(ASSIMP_FOUND)
 #file(GLOB_RECURSE headers ${Combo_SOURCE_DIR}/src/*.h)
 
 #file(GLOB_RECURSE sources ${Combo_SOURCE_DIR}/src/*.cpp)
-set(source_files
+set(source_files 
 src/main.cpp
-src/graphics_engine.h
-src/SDLWindow.cpp
-src/imgui_impl_sdl.cpp
-src/imgui_impl_opengl3.cpp
-src/imgui/imgui.cpp
-src/imgui/imgui.h
-src/imgui/imgui_demo.cpp
-src/imgui/imgui_draw.cpp
-src/imgui/imgui_internal.h
-src/imgui/imconfig.h
-src/imgui/imstb_rectpack.h
-src/imgui/imstb_textedit.h
-src/imgui/imstb_truetype.h
-src/imgui/imgui_widgets.cpp
+src/Combo.h
+src/Combo/Engine.cpp
+src/Combo/LogManager.cpp
 )
+ 
 add_executable(Combo ${source_files})
 
 include_directories(
@@ -75,7 +68,9 @@ include_directories(
     ${ASSIMP_INCLUDE_DIRS}
     ${SDL2_IMAGE_INCLUDE_DIRS}
     ${GLM_INCLUDE_DIRS}
-    ${SDL2_INCLUDE_DIR})
+    ${SDL2_INCLUDE_DIR}
+    ${CMAKE_SOURCE_DIR}/libs/spdlog/include/
+    )
 
 target_link_libraries(Combo
     ${OPENGL_LIBRARIES}
