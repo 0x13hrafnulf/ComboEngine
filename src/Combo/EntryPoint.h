@@ -1,4 +1,4 @@
-
+#pragma once
 
 extern Combo::Engine* Combo::CreateApplication();
 

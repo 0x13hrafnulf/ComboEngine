@@ -6,16 +6,14 @@
 
 namespace Combo
 {
+
     Engine::Engine()
     {
 
     }
-    Engine::~Engine()
-    {
-        
-    }
 
-    void Run()
+
+    void Engine::Run()
     {
 
         while(true)

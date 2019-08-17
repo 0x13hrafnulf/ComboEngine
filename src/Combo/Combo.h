@@ -1,8 +1,8 @@
 #pragma once
 
 //*******************************************************
-#include "Combo/LogManager.h"
-#include "Combo/Engine.h"
+#include "LogManager.h"
+#include "Engine.h"
 
 //*******************************************************
 
