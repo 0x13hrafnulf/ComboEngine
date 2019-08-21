@@ -1,5 +1,3 @@
-#include <SDL2/SDL.h>
-#include <GL/glew.h>
 #include "Engine.h"
 #include "LogManager.h"
 
@@ -9,30 +7,18 @@ namespace Combo
 
     Engine::Engine()
     {
-
+        m_Window = std::unique_ptr<Window>(Window::CreateWindow());
     }
 
 
     void Engine::Run()
     {
 
-        while(true)
+        while(m_Running)
         {
-
+            m_Window->Update();
         }
 
-    }
-
-    int Engine::Init()
-    {
-    
-        return 0;
-    }
-
-    int Engine::Shutdown()
-    {
-        
-        return 0;
     }
 
 }

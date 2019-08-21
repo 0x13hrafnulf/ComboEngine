@@ -61,7 +61,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/libs/imgui/
     )
 
-add_library(Combo SHARED Engine.cpp LogManager.cpp)
+add_library(Combo SHARED Engine.cpp LogManager.cpp SDLWindow.cpp)
 
 target_link_libraries(Combo
     ${OPENGL_LIBRARIES}

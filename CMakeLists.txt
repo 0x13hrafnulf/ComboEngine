@@ -19,6 +19,7 @@ add_executable(${PROJECT_NAME} src/Application/Application.cpp)
 include_directories(
     ${CMAKE_SOURCE_DIR}/src/Application/
     ${CMAKE_SOURCE_DIR}/src/
+    ${CMAKE_SOURCE_DIR}/src/Combo
     ${CMAKE_SOURCE_DIR}/libs/spdlog/include/
     ${CMAKE_SOURCE_DIR}/libs/imgui/
 )

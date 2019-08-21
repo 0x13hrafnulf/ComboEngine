@@ -1,38 +1,67 @@
-#ifndef COMBO_SDLWINDOW_H
-#define COMBO_SDLWINDOW_H
+#pragma once
 
-#include "../combopch.h"
-
+#include "combopch.h"
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 
-class SDLWindow
-{
-    public:
+#include "LogManager.h"
+#include "WindowBase.h"
 
-    SDLWindow();
-    ~SDLWindow();
+namespace Combo
+{  
 
-    void CreateWindow(int width, int height, const std::string& title);
-    void DestroyWindow();
-    void SwapBuffers();
+    class SDLWindow : public Window
+    {
+        public:
+
+        SDLWindow(const WindowAttributes& attribs);
+        virtual ~SDLWindow();
+
+        void Update() override;
+
+        void SetVsync(bool enabled) override;
+        bool IsVsync() const override;
+
+        int GetWindowWidth();
+        int GetWindowHeight();
+        const std::string& GetWindowTitle();
+        SDL_Window* GetWindowPointer();
+
+        
+        unsigned int GetWindowWidth() const override { return m_Properties.Width; }
+        unsigned int GetWindowHeight() const override { return m_Properties.Height; }
+        virtual void* GetNativeWindow() const { return m_Window;}
+        
+        /*
+        void SetEventCallback(const EventCallbackFn& callback) = 0;
+        void SetVsync(bool enabled) = 0;
+        bool IsVsync() = 0;
+         */ 
+        
 
 
-    int GetWindowWidth();
-    int GetWindowHeight();
-    const std::string& GetWindowTitle();
-    SDL_Window* GetWindowPointer();
+        private:
+        //Functions
+        virtual void Init(const WindowAttributes& attribs);
+        virtual void Shutdown();
 
-    
-    
-    
-    private:
-    SDL_Window* m_window;
-    int m_width; 
-    int m_height;
-    std::string m_title;
+        //Data
+        SDL_Window* m_Window;
+        SDL_GLContext m_Context;
 
-};
+        struct WindowProperties
+        {
+            std::string Title;
+            unsigned int Width;
+            unsigned int Height;
+            bool Vsync;
+
+            //EventCallbackFn EventCallback
+        };
+
+        WindowProperties m_Properties;
 
 
-#endif
+    };
+
+}
