@@ -5,11 +5,11 @@
 	path = libs/imgui
 	url = https://github.com/umarbaevB/imgui
 [submodule "libs/sdl"]
-    path = libs/sdl
-    url = https://github.com/SDL-mirror/SDL
+	path = libs/sdl
+	url = https://github.com/SDL-mirror/SDL
 [submodule "libs/glew"]
-    path = libs/glew
-    url = https://github.com/nigels-com/glew    
+	path = libs/glew
+	url = https://github.com/nigels-com/glew
 [submodule "libs/glm"]
-    path = libs/glm
-    url = https://github.com/g-truc/glm
+	path = libs/glm
+	url = https://github.com/g-truc/glm
