@@ -26,7 +26,7 @@ Game engine development
 
 7. LODE_PNG (not used yet): https://github.com/lvandeve/lodepng
 
-8. CMAKE: https://cmake.org/
+8. Premake https://premake.github.io/ (CMAKE: https://cmake.org/)
 
 9. Imgui https://github.com/ocornut/imgui
    Imgui_SDL https://github.com/Tyyppi77/imgui_sdl
