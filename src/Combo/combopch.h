@@ -1,8 +1,12 @@
 //precompiled header
 #pragma once
 
-#include <iostream>
-#include <string>
+#include <iostream>>
 #include <sstream>
+#include <functional>
+#include <algorithm>
+
+#include <string>
+#include <vector>
 
 
