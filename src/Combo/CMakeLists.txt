@@ -3,6 +3,8 @@ project(COMBO)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/") 
 
+#include(cotire)
+
 if(WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
 else()
@@ -34,10 +36,10 @@ if(GLM_FOUND)
     include_directories(SYSTEM ${GLM_INCLUDE_DIRS})
 endif(GLM_FOUND)
 
-find_package(ASSIMP REQUIRED)
-if(ASSIMP_FOUND)
-    include_directories(SYSTEM ${ASSIMP_INCLUDE_DIRS})
-endif(ASSIMP_FOUND)
+#find_package(ASSIMP REQUIRED)
+#if(ASSIMP_FOUND)
+#   include_directories(SYSTEM ${ASSIMP_INCLUDE_DIRS})
+#endif(ASSIMP_FOUND)
 
 #Source/Header files
 
@@ -71,5 +73,5 @@ target_link_libraries(Combo
     ${GLEW_LIBRARIES}
     ${GLM_LIBRARIES}
 )
-
+#cotire(Combo)
 #ImGuI ImGuizmo OPENAL bullet reactphysics3d

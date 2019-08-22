@@ -32,8 +32,10 @@ namespace Combo {
         if (!s_SDLInitialized)
         {
             int init = SDL_Init(flags);
-            COMBO_ERROR_LOG("Error: %s\n", SDL_GetError());
-            
+            if(init != 0) 
+            {
+                COMBO_ERROR_LOG(SDL_GetError());
+            }
             s_SDLInitialized = true;
         }
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
@@ -50,7 +52,7 @@ namespace Combo {
 
         if(m_Window == nullptr)
         {
-            COMBO_ERROR_LOG("Could not create window: %s\n", SDL_GetError());//change to std::cout
+            COMBO_ERROR_LOG(SDL_GetError());
             SDL_Quit();
         }
 
@@ -58,7 +60,7 @@ namespace Combo {
 
         if(m_Context == nullptr)
         {
-            COMBO_ERROR_LOG("Could not create window: %s\n", SDL_GetError());//change to std::cout
+            COMBO_ERROR_LOG(SDL_GetError());
             exit(1);
         }
 

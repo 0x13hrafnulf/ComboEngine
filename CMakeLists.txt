@@ -3,7 +3,7 @@ project(App)
 
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/") 
-include(cotire)
+
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/src/Combo)
 
@@ -27,4 +27,3 @@ include_directories(
 target_link_libraries(${PROJECT_NAME}
    Combo
 )
-cotire(App Combo)

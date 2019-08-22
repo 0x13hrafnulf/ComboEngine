@@ -5,7 +5,7 @@
 # SDL2_FOUND, if false, do not try to link to SDL2
 # SDL2_INCLUDE_DIR, where to find SDL.h
 
-
+SET(SDL2_FOUND "NO")
 
 SET(SDL2_SEARCH_DIRS
 	"./libs/SDL2"

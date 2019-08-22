@@ -15,7 +15,7 @@ namespace Combo
         public:
 
         SDLWindow(const WindowAttributes& attribs);
-        virtual ~SDLWindow();
+        ~SDLWindow();
 
         void Update() override;
 
@@ -30,7 +30,7 @@ namespace Combo
         
         unsigned int GetWindowWidth() const override { return m_Properties.Width; }
         unsigned int GetWindowHeight() const override { return m_Properties.Height; }
-        virtual void* GetNativeWindow() const { return m_Window;}
+        void* GetNativeWindow() const { return m_Window;}
         
         /*
         void SetEventCallback(const EventCallbackFn& callback) = 0;
@@ -42,8 +42,8 @@ namespace Combo
 
         private:
         //Functions
-        virtual void Init(const WindowAttributes& attribs);
-        virtual void Shutdown();
+        void Init(const WindowAttributes& attribs);
+        void Shutdown();
 
         //Data
         SDL_Window* m_Window;
