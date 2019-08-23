@@ -9,21 +9,21 @@ workspace "Combo"
         "Dist"
     }
 
-IncludeDir = {}
-IncludeDir["SDL2"] = "libs/sdl/include"
-IncludeDir["GLEW"] = "libs/glew/include"
-IncludeDir["GLAD"] = "libs/glad/include"
-IncludeDir["ImGui"] = "libs/imgui"
-IncludeDir["GLM"] = "libs/glm"
+--IncludeDir = {}
+--IncludeDir["SDL2"] = "libs/SDL2/include"
+--IncludeDir["GLEW"] = "libs/glew/include"
+--IncludeDir["GLAD"] = "libs/glad/include"
+--IncludeDir["ImGui"] = "libs/imgui"
+--IncludeDir["GLM"] = "libs/glm"
+
+
+--group "Dependencies"
+--    include "libs/glad"
+--    include "libs/imgui"
+     
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-group "Dependencies"
-    include "libs/sdl"
-    include "libs/glew"
-    include "libs/glad"
-    include "libs/imgui"
- 
 
 project "Combo"
     location "src/Combo"
@@ -53,9 +53,23 @@ project "Combo"
         "libs/spdlog/include/",
         "libs/"
     }
-    filter {"system:linux}
-        
-   -- filter "configuration:windows"
+
+    filter {"system:linux"}
+        buildoptions{
+            "-lSDL2", "-lSDL2main"
+            --"-lGLEW", "-lGLU", "-lGL"
+        }
+        linkoptions{
+            "-lSDL2",
+            "-lSDL2main"
+            --"-lGLEW", "-lGLU", "-lGL"
+        }
+
+   filter "configuration:windows" --includedirs {"%{IncludeDir.GLEW}"} libdirs {"%{LibDir.GLEW}"}
+        links{
+            "opengl32.lib"
+        }
+
   
     filter "configurations:Debug"
 		defines "COMBO_DEBUG"
@@ -101,7 +115,7 @@ project "Application"
     {
         "Combo"
     }
-
+    
 
     filter "configurations:Debug"
 		defines "COMBO_DEBUG"

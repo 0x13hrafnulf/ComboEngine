@@ -18,7 +18,7 @@ Game engine development
 
 3. SDL2_image: https://www.libsdl.org/projects/SDL_image/
 
-4. GLEW: https://github.com/nigels-com/glew
+4. GLAD https://github.com/Dav1dde/glad /GLEW: https://github.com/nigels-com/glew
 
 5. GLM: https://github.com/g-truc/glm
 
