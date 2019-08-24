@@ -5,7 +5,16 @@ apt-get install libglew-dev libglm-dev
 apt-get install libfreetype6 libfreetype6-dev
 apt-get install libassimp4 libassimp-dev assimp-utils
 
-Build:
-cd build
-cmake ../
+Building using premake, due to unsupported feature in cmake for precompiled headers (cmake files are still included in tmp folder if you want)
+
+***Unix***:
+./premake/premake5 gmake 
 make
+
+***Windows***:
+./premake/premake5.exe vs2015/17/19
+
+Check premake-wiki for more information
+url: https://github.com/premake/premake-core/wiki/
+
+

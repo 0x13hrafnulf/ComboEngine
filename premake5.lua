@@ -11,7 +11,6 @@ workspace "Combo"
 
 --IncludeDir = {}
 --IncludeDir["SDL2"] = "libs/SDL2/include"
---IncludeDir["GLEW"] = "libs/glew/include"
 --IncludeDir["GLAD"] = "libs/glad/include"
 --IncludeDir["ImGui"] = "libs/imgui"
 --IncludeDir["GLM"] = "libs/glm"
@@ -53,7 +52,7 @@ project "Combo"
         "libs/spdlog/include/",
         "libs/"
     }
-
+    --links {"Glad" , "ImGui"}
     filter {"system:linux"}
         buildoptions{
             "-lSDL2", "-lSDL2main"
@@ -65,7 +64,7 @@ project "Combo"
             --"-lGLEW", "-lGLU", "-lGL"
         }
 
-   filter "configuration:windows" --includedirs {"%{IncludeDir.GLEW}"} libdirs {"%{LibDir.GLEW}"}
+   filter "configuration:windows" --includedirs {"%{IncludeDir.SDL2}"} libdirs {"%{LibDir.SDL2}"}
         links{
             "opengl32.lib"
         }
