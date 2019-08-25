@@ -22,17 +22,16 @@ namespace Combo {
 class LogManager
 {
     public:
+        
+        static void Init();
 
-
-    static void Init();
-    
-    static std::shared_ptr<spdlog::logger>& GetComboLogManager() { return s_ComboLogManager; }
-    static std::shared_ptr<spdlog::logger>& GetClientLogManager() { return s_ClientLogManager; }
+        static std::shared_ptr<spdlog::logger>& GetComboLogManager() { return s_ComboLogManager; }
+        static std::shared_ptr<spdlog::logger>& GetClientLogManager() { return s_ClientLogManager; }
 
     private:
 
-    static std::shared_ptr<spdlog::logger> s_ComboLogManager;
-    static std::shared_ptr<spdlog::logger> s_ClientLogManager;
+        static std::shared_ptr<spdlog::logger> s_ComboLogManager;
+        static std::shared_ptr<spdlog::logger> s_ClientLogManager;
 
 };
 
