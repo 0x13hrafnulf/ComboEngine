@@ -32,12 +32,7 @@ namespace Combo
         unsigned int GetWindowHeight() const override { return m_Properties.Height; }
         void* GetNativeWindow() const { return m_Window;}
         
-        /*
-        void SetEventCallback(const EventCallbackFn& callback) = 0;
-        void SetVsync(bool enabled) = 0;
-        bool IsVsync() = 0;
-         */ 
-        
+        void SetEventCallback(const EventCallbackFunction& callback) override { m_Properties.EventCallback = callback;};
 
 
         private:
@@ -56,7 +51,7 @@ namespace Combo
             unsigned int Height;
             bool Vsync;
 
-            //EventCallbackFn EventCallback
+            EventCallbackFunction EventCallback;
         };
 
         WindowProperties m_Properties;

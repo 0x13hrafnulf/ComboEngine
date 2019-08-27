@@ -1,6 +1,10 @@
 #pragma once
 
 #include "WindowBase.h"
+#include "InputManager/Event.h"
+#include "InputManager/WindowEvent.h"
+
+
 
 namespace Combo
 {
@@ -12,6 +16,8 @@ namespace Combo
             virtual ~Engine() = default;
 
             void Run();
+            void OnEvent(Event& event);
+            bool WindowClose(WindowCloseEvent& event);
 
             Window& GetWindow() {return *m_Window; }
             bool IsRunning() { return m_Running; }

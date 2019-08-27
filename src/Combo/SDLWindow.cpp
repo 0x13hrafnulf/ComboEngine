@@ -70,6 +70,9 @@ namespace Combo {
         // glClearColor(0.0f,0.0f,1.0f,1.0f);
         // glEnable(GL_BLEND);
         // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+
+        
     }
     
     void SDLWindow::Update()
@@ -82,7 +85,9 @@ namespace Combo {
     
     void SDLWindow::Shutdown()
     {
+        SDL_GL_DeleteContext(m_Context);
         SDL_DestroyWindow(m_Window);
+        SDL_Quit();
     }
 
     void SDLWindow::SetVsync(bool enabled)

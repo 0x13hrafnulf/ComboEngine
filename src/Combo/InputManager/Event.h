@@ -9,10 +9,10 @@ namespace Combo
     {
         None = 0,
 
-        WINDOW_Closed, 
-        WINDOW_Resized, 
-        WINDOW_Moved,
-        WINDOW_Focused, 
+        WINDOW_Close, 
+        WINDOW_Resize, 
+        WINDOW_Move,
+        WINDOW_Focus, 
         WINDOW_FocusLost,
 
         KEY_Pressed, 
@@ -27,12 +27,12 @@ namespace Combo
     };
     enum EventCategory
     {
-        None              = 0,
-        APPLICATION_Event = BIT(0),
-        INPUT_Event       = BIT(1),
-        KEYBOARD_Event    = BIT(2),
-        MOUSE_Event       = BIT(3),
-        MOUSEBUTTON_Event = BIT(4)
+        None                      = 0,
+        WINDOW_EventCategory      = BIT(0),
+        INPUT_EventCategory       = BIT(1),
+        KEYBOARD_EventCategory    = BIT(2),
+        MOUSE_EventCategory       = BIT(3),
+        MOUSEBUTTON_EventCategory = BIT(4)
 
     };
     

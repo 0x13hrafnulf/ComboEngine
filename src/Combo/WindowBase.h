@@ -1,7 +1,7 @@
 #pragma once
 
 #include "combopch.h"
-
+#include "InputManager/Event.h"
 
 namespace Combo
 {
@@ -28,6 +28,8 @@ namespace Combo
     {
         public:
 
+        using EventCallbackFunction = std::function<void(Event&)>;
+
         virtual ~Window() = default;
 
         virtual void Update() = 0;
@@ -42,13 +44,9 @@ namespace Combo
 
         static Window* CreateWindow(const WindowAttributes& attrib = WindowAttributes());
     
-        /*
 
-       
-        virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
-     
-        
-         */
+        virtual void SetEventCallback(const EventCallbackFunction& callback) = 0;
+
     
     
     };
