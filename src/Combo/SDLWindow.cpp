@@ -1,5 +1,9 @@
 #include "SDLWindow.h"
 
+#include "InputManager/WindowEvent.h"
+
+
+
 namespace Combo {
 
     static bool s_SDLInitialized = false;
@@ -66,6 +70,10 @@ namespace Combo {
 
         SetVsync(true);
 
+        //Close Window callback
+        //SDL_AddEventWatch(WindowCloseFilter, &m_Properties);
+        
+
         // GLenum error = glewInit();
         // glClearColor(0.0f,0.0f,1.0f,1.0f);
         // glEnable(GL_BLEND);
@@ -78,7 +86,21 @@ namespace Combo {
     void SDLWindow::Update()
     {
         SDL_Event event;
-        SDL_PollEvent(&event);
+        while (SDL_PollEvent(&event))
+        {
+            switch (event.type)
+            {
+            case SDL_QUIT:
+                WindowCloseFilter(&m_Properties, &event);
+                COMBO_INFO_LOG("Closing!");
+                break;
+            case SDL_WINDOWEVENT_SIZE_CHANGED:
+                WindowResizeFilter(&m_Properties, &event);
+                COMBO_TRACE_LOG("WINDOW RESIZED!");
+            default:
+                break;
+            }
+        }
         SDL_GL_SwapWindow(m_Window);
     }
     
@@ -101,5 +123,27 @@ namespace Combo {
     bool SDLWindow::IsVsync() const
     {
         return m_Properties.Vsync;
+    }
+
+    int SDLWindow::WindowCloseFilter(void* data, SDL_Event* e)
+    {
+        WindowProperties& properties = *(WindowProperties*)data;
+        WindowCloseEvent event;
+
+        properties.EventCallback(event);
+        return 0;
+    }
+
+    int SDLWindow::WindowResizeFilter(void* data, SDL_Event* e)
+    {
+        
+        WindowProperties& properties = *(WindowProperties*)data;
+        properties.Width = e->window.data1;
+        properties.Height = e->window.data2;
+        
+        WindowResizeEvent event(properties.Width, properties.Height);
+
+        properties.EventCallback(event);
+        return 0;
     }
 }

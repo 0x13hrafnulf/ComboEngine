@@ -41,7 +41,7 @@ project "Combo"
     files
     {
         "src/%{prj.name}/**.h",
-        "src/%{prj.name}/**.cpp"
+        "src/%{prj.name}/**.cpp",
     }
     
     removefiles("src/%{prj.name}/not_used/**")
@@ -49,6 +49,7 @@ project "Combo"
     includedirs
     {
         "src/%{prj.name}/",
+        "src/%{prj.name}/InputManager",
         "libs/spdlog/include/",
         "libs/"
     }
@@ -64,7 +65,7 @@ project "Combo"
             --"-lGLEW", "-lGLU", "-lGL"
         }
 
-   filter "configuration:windows" --includedirs {"%{IncludeDir.SDL2}"} libdirs {"%{LibDir.SDL2}"}
+   filter "system:windows" --includedirs {"%{IncludeDir.SDL2}"} libdirs {"%{LibDir.SDL2}"}
         links{
             "opengl32.lib"
         }
@@ -114,7 +115,16 @@ project "Application"
     {
         "Combo"
     }
-    
+    filter {"system:linux"}
+        buildoptions{
+            "-lSDL2", "-lSDL2main"
+            --"-lGLEW", "-lGLU", "-lGL"
+        }
+        linkoptions{
+            "-lSDL2",
+            "-lSDL2main"
+            --"-lGLEW", "-lGLU", "-lGL"
+        }
 
     filter "configurations:Debug"
 		defines "COMBO_DEBUG"

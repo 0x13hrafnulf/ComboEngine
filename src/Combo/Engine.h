@@ -18,6 +18,7 @@ namespace Combo
             void Run();
             void OnEvent(Event& event);
             bool WindowClose(WindowCloseEvent& event);
+            bool WindowResize(WindowResizeEvent& event);
 
             Window& GetWindow() {return *m_Window; }
             bool IsRunning() { return m_Running; }

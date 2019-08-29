@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Event.h"
-#include "Combo/combopch.h"
+#include "combopch.h"
 
 namespace Combo
 {
@@ -18,7 +18,7 @@ namespace Combo
             template<typename T>
             bool DispatchEvent(std::function<bool(T&)> func)//
             {
-                if(m_Event.GetEventType == T::GetStaticEventType())
+                if(m_Event.GetEventType() == T::GetStaticEventType())
                 {
                     m_Event.Handled = func(*(T*)&m_Event);//Takes address of event -> casts it to specified "T" pointer ->
                                                             //then dereferences it to fit std::function<bool(T&)>, which takes reference to T

@@ -34,7 +34,9 @@ namespace Combo
         
         void SetEventCallback(const EventCallbackFunction& callback) override { m_Properties.EventCallback = callback;};
 
-
+         //Event Filters
+        int WindowCloseFilter(void* data, SDL_Event* e);
+        int WindowResizeFilter(void* data, SDL_Event* e);
         private:
         //Functions
         void Init(const WindowAttributes& attribs);
@@ -55,6 +57,11 @@ namespace Combo
         };
 
         WindowProperties m_Properties;
+
+        
+       
+
+
 
 
     };

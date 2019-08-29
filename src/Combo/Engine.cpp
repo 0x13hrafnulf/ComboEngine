@@ -42,5 +42,13 @@ namespace Combo
         m_Running = false;
         return true;
     }
+    
+    bool Engine::WindowResize(WindowResizeEvent& event)
+    {
+        //Change camera view after resizing
+        //glviewport(0,0,width, height);
+
+        return true;
+    }
 
 }

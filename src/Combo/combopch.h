@@ -1,7 +1,7 @@
 //precompiled header
 #pragma once
 
-#include <iostream>>
+#include <iostream>
 #include <sstream>
 #include <functional>
 #include <algorithm>
