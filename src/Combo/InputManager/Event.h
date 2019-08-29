@@ -46,7 +46,14 @@ namespace Combo
 
             bool IsEventInCategory(EventCategory category) { return GetEventCategory() & category;} //Check if Event belongs to certain category
 
+            virtual std::string ToString() const { return GetEventName(); } //To be used for logging in spdlog
+
             bool Handled = false;
     };
+
+    inline std::ostream& operator <<(std::stringstream os, const Event& event)
+    {
+        return os << event.ToString();
+    }
 
 }

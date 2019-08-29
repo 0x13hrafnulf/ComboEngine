@@ -24,6 +24,13 @@ namespace Combo
             return this->WindowClose(e);
         });
 
+        for(auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
+        {
+            (*--it)->OnEvent(event);
+            if(event.Handled)
+                break;
+        }
+
     }
 
 
@@ -32,9 +39,24 @@ namespace Combo
 
         while(m_Running)
         {
+            for(Layer* layer : m_LayerStack)
+            {
+                layer->Update();
+            }
             m_Window->Update();
         }
 
+    }
+
+
+
+    void Engine::PushLayer(Layer* layer)
+    {
+        m_LayerStack.PushLayer(layer);
+    }
+    void Engine::PushOverLay(Layer* layer)
+    {
+        m_LayerStack.PopLayer(layer);
     }
 
     bool Engine::WindowClose(WindowCloseEvent& event)
