@@ -9,19 +9,21 @@ workspace "Combo"
         "Dist"
     }
 
---IncludeDir = {}
---IncludeDir["SDL2"] = "libs/SDL2/include"
---IncludeDir["GLAD"] = "libs/glad/include"
+    outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+        
+IncludeDir = {}
+IncludeDir["SDL2"] = "libs/SDL2/include"
+IncludeDir["GLAD"] = "libs/glad/include"
 --IncludeDir["ImGui"] = "libs/imgui"
 --IncludeDir["GLM"] = "libs/glm"
 
 
---group "Dependencies"
---    include "libs/glad"
+group "Dependencies"
+    include "libs/glad"
 --    include "libs/imgui"
-     
+group ""
 
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
 
 
 project "Combo"
@@ -50,18 +52,22 @@ project "Combo"
     {
         "src/%{prj.name}/",
         "libs/spdlog/include/",
-        "libs/"
+        "libs/",
+        "%{IncludeDir.GLAD}"
     }
-    --links {"Glad" , "ImGui"}
+    links {"Glad"}
+    
     filter {"system:linux"}
+        pic "on"
         buildoptions{
-            "-lSDL2", "-lSDL2main"
-            --"-lGLEW", "-lGLU", "-lGL"
+            "-lSDL2", "-lSDL2main",
+            "-lGL","-lGLU",
+            "-lGLEW", "-ldl", "-lpthread"
         }
         linkoptions{
-            "-lSDL2",
-            "-lSDL2main"
-            --"-lGLEW", "-lGLU", "-lGL"
+            "-lSDL2", "-lSDL2main",
+             "-lGL","-lGLU",
+            "-lGLEW", "-ldl", "-lpthread"
         }
 
    filter "system:windows" --includedirs {"%{IncludeDir.SDL2}"} libdirs {"%{LibDir.SDL2}"}
@@ -115,14 +121,16 @@ project "Application"
         "Combo"
     }
     filter {"system:linux"}
+        links { "Glad" }
         buildoptions{
-            "-lSDL2", "-lSDL2main"
-            --"-lGLEW", "-lGLU", "-lGL"
+            "-lSDL2", "-lSDL2main",
+            "-lGL","-lGLU",
+            "-lGLEW", "-ldl", "-lpthread"
         }
         linkoptions{
-            "-lSDL2",
-            "-lSDL2main"
-            --"-lGLEW", "-lGLU", "-lGL"
+            "-lSDL2", "-lSDL2main",
+            "-lGL","-lGLU",
+            "-lGLEW", "-ldl", "-lpthread"
         }
 
     filter "configurations:Debug"

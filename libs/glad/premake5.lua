@@ -18,7 +18,8 @@ project "Glad"
     {
         "include"
     }
-   
+    filter {"system:linux"}
+        pic "on"
 
     filter "configurations:Debug"
         runtime "Debug"

@@ -4,7 +4,7 @@
 #include "InputManager/KeyboardEvent.h"
 #include "InputManager/MouseEvent.h"
 
-
+#include "glad/glad.h"
 
 namespace Combo {
 
@@ -46,8 +46,8 @@ namespace Combo {
         }
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+        // SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+        // SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
 
         // Create window with graphics context
         SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -70,16 +70,29 @@ namespace Combo {
             exit(1);
         }
 
+        int status = gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress);
+
+        if(!status)
+        {
+            COMBO_ERROR_LOG("Failed to initialize GLAD!");
+            exit(1);
+        }
+
+        COMBO_INFO_LOG("   Vendor: {0}", glGetString(GL_VENDOR));
+        COMBO_INFO_LOG("   Renderer: {0}", glGetString(GL_RENDERER));
+        COMBO_INFO_LOG("   Version: {0}", glGetString(GL_VERSION));
+
+        
+
         SetVsync(true);
 
         //Close Window callback
         //SDL_AddEventWatch(WindowCloseFilter, &m_Properties);
         
 
-        // GLenum error = glewInit();
-        // glClearColor(0.0f,0.0f,1.0f,1.0f);
-        // glEnable(GL_BLEND);
-        // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glClearColor(0.0f,0.0f,1.0f,1.0f);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
         
