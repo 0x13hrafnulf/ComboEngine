@@ -2,6 +2,8 @@
 
 #define BIT(x) (1 << x)
 
+#include "../combopch.h"
+
 namespace Combo
 {
 
@@ -51,7 +53,7 @@ namespace Combo
             bool Handled = false;
     };
 
-    inline std::ostream& operator <<(std::stringstream os, const Event& event)
+    inline std::ostream& operator<<(std::ostream& os, const Event& event)
     {
         return os << event.ToString();
     }

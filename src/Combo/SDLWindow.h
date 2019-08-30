@@ -36,7 +36,17 @@ namespace Combo
 
          //Event Filters
         int WindowCloseFilter(void* data, SDL_Event* e);
-        int WindowResizeFilter(void* data, SDL_Event* e);
+        int WindowEventFilter(void* data, SDL_Event* e);
+        int KeyDownEventFilter(void* data, SDL_Event* e);
+        int KeyUpEventFilter(void* data, SDL_Event* e);
+        int KeyboardTextInputEventFilter(void* data, SDL_Event* e);
+        int KeyboardTextEditEventFilter(void* data, SDL_Event* e);
+        int MouseMovedEventFilter(void* data, SDL_Event* e);
+        int MouseScrolledEventFilter(void* data, SDL_Event* e);
+        int MouseButtonUpEventFilter(void* data, SDL_Event* e);
+        int MouseButtonDownEventFilter(void* data, SDL_Event* e);
+
+        
         private:
         //Functions
         void Init(const WindowAttributes& attribs);

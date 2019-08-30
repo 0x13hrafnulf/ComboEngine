@@ -49,7 +49,6 @@ project "Combo"
     includedirs
     {
         "src/%{prj.name}/",
-        "src/%{prj.name}/InputManager",
         "libs/spdlog/include/",
         "libs/"
     }

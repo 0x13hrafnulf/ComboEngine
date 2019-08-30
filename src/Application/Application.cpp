@@ -10,11 +10,11 @@ class SandboxLayer : public Combo::Layer
         }
         void Update() override
         {
-            COMBO_INFO_LOG("Sandbox::Update");
+            CLIENT_INFO_LOG("Sandbox::Update");
         }
         void OnEvent(Combo::Event& event) override
         {
-            COMBO_TRACE_LOG("{0}", event);
+            CLIENT_TRACE_LOG("{0}", event);
         }
 };
 
@@ -25,7 +25,7 @@ class Application : public Combo::Engine
 
     Application()
     {
-
+        PushLayer(new SandboxLayer());
     }
     ~Application()
     {

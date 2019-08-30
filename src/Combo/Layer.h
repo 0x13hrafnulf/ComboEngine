@@ -11,7 +11,7 @@ namespace Combo
     {
         public:
 
-            Layer(const std::string name);
+            Layer(const std::string& name);
             virtual ~Layer() = default;
 
             virtual void Attach(){}

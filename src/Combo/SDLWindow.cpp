@@ -1,6 +1,8 @@
 #include "SDLWindow.h"
 
 #include "InputManager/WindowEvent.h"
+#include "InputManager/KeyboardEvent.h"
+#include "InputManager/MouseEvent.h"
 
 
 
@@ -94,10 +96,26 @@ namespace Combo {
                 WindowCloseFilter(&m_Properties, &event);
                 COMBO_INFO_LOG("Closing!");
                 break;
-            case SDL_WINDOWEVENT_SIZE_CHANGED:
-                WindowResizeFilter(&m_Properties, &event);
-                COMBO_TRACE_LOG("WINDOW RESIZED!");
-            default:
+            case SDL_WINDOWEVENT:
+                WindowEventFilter(&m_Properties, &event);
+                COMBO_TRACE_LOG("WINDOW EVENT!");
+            case SDL_MOUSEMOTION:
+                MouseMovedEventFilter(&m_Properties, &event);
+                break;
+            case SDL_MOUSEWHEEL:
+                MouseScrolledEventFilter(&m_Properties, &event);
+                break;
+            case SDL_MOUSEBUTTONDOWN:
+                MouseButtonDownEventFilter(&m_Properties, &event);
+                break;
+            case SDL_MOUSEBUTTONUP:
+                MouseButtonUpEventFilter(&m_Properties, &event);
+                break;
+            case SDL_KEYDOWN:
+                KeyDownEventFilter(&m_Properties, &event);
+                break;
+            case SDL_KEYUP:
+                KeyUpEventFilter(&m_Properties, &event);
                 break;
             }
         }
@@ -134,7 +152,7 @@ namespace Combo {
         return 0;
     }
 
-    int SDLWindow::WindowResizeFilter(void* data, SDL_Event* e)
+    int SDLWindow::WindowEventFilter(void* data, SDL_Event* e)
     {
         
         WindowProperties& properties = *(WindowProperties*)data;
@@ -145,5 +163,86 @@ namespace Combo {
 
         properties.EventCallback(event);
         return 0;
+    }
+    int SDLWindow::KeyDownEventFilter(void* data, SDL_Event* e)
+    {
+        WindowProperties& properties = *(WindowProperties*)data;
+
+        int key = e->key.keysym.sym;
+        int count = e->key.repeat;
+        KeyPressedEvent event(key, count);
+        properties.EventCallback(event);
+
+        return 0;
+
+    }
+    int SDLWindow::KeyUpEventFilter(void* data, SDL_Event* e)
+    {
+        WindowProperties& properties = *(WindowProperties*)data;
+
+        int key = e->key.keysym.sym;
+        KeyReleasedEvent event(key);
+        properties.EventCallback(event);
+
+        return 0;
+
+    }
+
+    int SDLWindow::MouseMovedEventFilter(void* data, SDL_Event* e)
+    {
+        WindowProperties& properties = *(WindowProperties*)data;
+
+        float xPos = e->motion.x;
+        float yPos = e->motion.y;
+            
+        MouseMovedEvent event(xPos, yPos);
+
+        properties.EventCallback(event);
+        return 0;
+    }
+    int SDLWindow::MouseScrolledEventFilter(void* data, SDL_Event* e)
+    {
+        WindowProperties& properties = *(WindowProperties*)data;
+       
+        float xOffset = e->wheel.x;
+        float yOffset = e->wheel.y;
+        
+        MouseScrolledEvent event(properties.Width, properties.Height);
+
+        properties.EventCallback(event);
+        return 0;
+    }
+    int SDLWindow::MouseButtonDownEventFilter(void* data, SDL_Event* e)
+    {
+        WindowProperties& properties = *(WindowProperties*)data;
+       
+        //float xPos = e->button.x;
+        //float yPos = e->button.y;
+        int key = e->button.button;
+        MouseButtonPressedEvent event(key);
+        properties.EventCallback(event);
+
+        return 0;
+    }
+    int SDLWindow::MouseButtonUpEventFilter(void* data, SDL_Event* e)
+    {
+        WindowProperties& properties = *(WindowProperties*)data;
+       
+        //float xPos = e->button.x;
+        //float yPos = e->button.y;
+        int key = e->button.button;
+        MouseButtonReleasedEvent event(key);
+        properties.EventCallback(event);
+
+        return 0;
+    }
+    int SDLWindow::KeyboardTextInputEventFilter(void* data, SDL_Event* e)
+    {
+       return 0;
+    }
+    int SDLWindow::KeyboardTextEditEventFilter(void* data, SDL_Event* e)
+    {
+       return 0;
+
     }
 }
