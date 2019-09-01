@@ -46,7 +46,7 @@ namespace Combo
             virtual int GetEventCategory() const = 0;
             virtual const char* GetEventName() const = 0;
 
-            bool IsEventInCategory(EventCategory category) { return GetEventCategory() & category;} //Check if Event belongs to certain category
+            inline bool IsEventInCategory(EventCategory category) { return GetEventCategory() & category;} //Check if Event belongs to certain category
 
             virtual std::string ToString() const { return GetEventName(); } //To be used for logging in spdlog
 

@@ -25,8 +25,8 @@ class LogManager
         
         static void Init();
 
-        static std::shared_ptr<spdlog::logger>& GetComboLogManager() { return s_ComboLogManager; }
-        static std::shared_ptr<spdlog::logger>& GetClientLogManager() { return s_ClientLogManager; }
+        inline static std::shared_ptr<spdlog::logger>& GetComboLogManager() { return s_ComboLogManager; }
+        inline static std::shared_ptr<spdlog::logger>& GetClientLogManager() { return s_ClientLogManager; }
 
     private:
 

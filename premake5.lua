@@ -14,7 +14,7 @@ workspace "Combo"
 IncludeDir = {}
 IncludeDir["SDL2"] = "libs/SDL2/include"
 IncludeDir["GLAD"] = "libs/glad/include"
---IncludeDir["ImGui"] = "libs/imgui"
+IncludeDir["ImGui"] = "libs/imgui"
 --IncludeDir["GLM"] = "libs/glm"
 
 
@@ -54,8 +54,9 @@ project "Combo"
         "libs/spdlog/include/",
         "libs/",
         "%{IncludeDir.GLAD}"
+        "%{IncludeDir.ImGui}"
     }
-    links {"Glad"}
+    links {"Glad", "ImGui"}
     
     filter {"system:linux"}
         pic "on"

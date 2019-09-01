@@ -25,10 +25,10 @@ namespace Combo
             void PushOverLay(Layer* layer);
 
 
-            Window& GetWindow() {return *m_Window; }
-            bool IsRunning() { return m_Running; }
+            inline Window& GetWindow() {return *m_Window; }
+            inline bool IsRunning() { return m_Running; }
 
-            static Engine& Get() { return s_Instance; }
+            inline static Engine& Get() { return s_Instance; }
 
        private:
             bool m_Running = true;

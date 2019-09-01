@@ -8,7 +8,7 @@ namespace Combo
     {
         public:
             
-            int GetMouseButton() const { return m_Button; }
+            inline int GetMouseButton() const { return m_Button; }
 
             virtual int GetEventCategory() const override { return INPUT_EventCategory | MOUSE_EventCategory; }
         protected:
@@ -74,8 +74,8 @@ namespace Combo
 
             }
 
-            float GetXOffset() const { return m_Xoffset;}
-            float GetYOffset() const { return m_Yoffset;}
+            inline float GetXOffset() const { return m_Xoffset;}
+            inline float GetYOffset() const { return m_Yoffset;}
 
             std::string ToString() const override
             {
@@ -105,8 +105,8 @@ namespace Combo
             {
 
             }
-            float GetX() const {return m_X;}
-            float GetY() const {return m_Y;}
+            inline float GetX() const {return m_X;}
+            inline float GetY() const {return m_Y;}
 
             std::string ToString() const override
             {

@@ -19,7 +19,7 @@ namespace Combo
             virtual void Update(){}
             virtual void OnEvent(Event& event){}
 
-            const std::string GetName() const { return m_Name; }
+            inline const std::string GetName() const { return m_Name; }
         protected:
             std::string m_Name;
             bool m_Enabled = true;

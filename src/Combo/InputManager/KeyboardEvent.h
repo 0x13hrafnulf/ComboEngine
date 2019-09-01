@@ -1,13 +1,14 @@
 #pragma once
 
 #include "Event.h"
+#include "InputCodes.h"
 
 namespace Combo
 {
     class KeyboardEvent : public Event
     {
         public:
-            int GetKey() const { return m_Key; }
+            inline int GetKey() const { return m_Key; }
 
             virtual int GetEventCategory() const override { return INPUT_EventCategory | KEYBOARD_EventCategory; }
 
@@ -31,9 +32,9 @@ namespace Combo
 
             }
 
-            int GetRepeatCount() const { return m_RepeatCount; }
+            inline int GetRepeatCount() const { return m_RepeatCount; }
 
-             std::string ToString() const override
+            std::string ToString() const override
             {
                 std::stringstream ss;
                 ss << "KeyPressedEvent: " << m_Key << " [" << m_RepeatCount << " times]";
@@ -58,7 +59,7 @@ namespace Combo
 
             }
 
-             std::string ToString() const override
+            std::string ToString() const override
             {
                 std::stringstream ss;
                 ss << "KeyReleasedEvent: " << m_Key;
@@ -80,7 +81,7 @@ namespace Combo
 
             }
 
-             std::string ToString() const override
+            std::string ToString() const override
             {
                 std::stringstream ss;
                 ss << "KeyTypedEvent: " << m_Key;

@@ -13,8 +13,8 @@ namespace Combo
 
             }
 
-            unsigned int GetWidth() const { return m_Width; }
-            unsigned int GetHeight() const { return m_Height; }
+            inline unsigned int GetWidth() const { return m_Width; }
+            inline unsigned int GetHeight() const { return m_Height; }
             
             std::string ToString() const override
             {
