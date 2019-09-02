@@ -5,35 +5,51 @@
 
 namespace Combo {
 
-    
+
     class InputManager
     {
         public:
             InputManager(const InputManager&) = delete;
             InputManager& operator=(const InputManager&) = delete;
 
-            inline static bool IsKeyPressed(KeyboardKey key);
+            inline static bool IsKeyPressed(KeyboardKey key) 
+            {
+                return s_Instance->IsKeyPressedImpl(key);
+            }
+
+            inline static bool IsMouseButtonPressed(MouseButton button)
+            {
+                return s_Instance->IsMouseButtonPressedImpl(button);
+            }
+            inline static std::pair<float, float> GetMousePosition()
+            {
+                return s_Instance->GetMousePositionImpl();
+            }
+            inline static float GetMouseX()
+            {
+                return s_Instance->GetMousePositionImpl().first;
+            }
+            inline static float GetMouseY()
+            {
+                 return s_Instance->GetMousePositionImpl().second;
+            }
+
             // inline static bool IsKeyReleased(KeyboardKey key);
             // inline static bool IsKeyDown(KeyboardKey key);
-
-            inline static bool IsMouseButtonPressed(MouseButton button);
-            inline static std::pair<float, float> GetMousePosition();
-            inline static float GetMouseX();
-            inline static float GetMouseY();
         private:
-            static InputManager s_Instance;
+            static InputManager* s_Instance;
         protected:
             InputManager() = default;
 
-            bool IsKeyPressedImpl(KeyboardKey key);
-            // bool IsKeyReleasedImpl(KeyboardKey key);
-            // bool IsKeyDownImpl(KeyboardKey key);
+            virtual bool IsKeyPressedImpl(KeyboardKey key);
            
-            bool IsMouseButtonPressedImpl(MouseButton button);
-            std::pair<float, float> GetMousePositionImpl();
-            float GetMouseXImpl();
-            float GetMouseYImpl();
-
+            virtual bool IsMouseButtonPressedImpl(MouseButton button);
+            virtual std::pair<float, float> GetMousePositionImpl();
+            virtual float GetMouseXImpl();
+            virtual float GetMouseYImpl();
+            
+            // virtual bool IsKeyReleasedImpl(KeyboardKey key);
+            // virtual bool IsKeyDownImpl(KeyboardKey key);
     };
     
 }

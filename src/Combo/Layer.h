@@ -18,7 +18,8 @@ namespace Combo
             virtual void Detach(){}
             virtual void Update(){}
             virtual void OnEvent(Event& event){}
-
+            virtual void ImGuiRender() {}
+            
             inline const std::string GetName() const { return m_Name; }
         protected:
             std::string m_Name;
