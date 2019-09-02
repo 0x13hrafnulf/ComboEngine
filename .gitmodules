@@ -1,9 +1,10 @@
 [submodule "libs/spdlog"]
 	path = libs/spdlog
 	url = https://github.com/gabime/spdlog
-[submodule "libs/imgui"]
-	path = libs/imgui
-	url = https://github.com/umarbaevB/imgui
 [submodule "libs/glm"]
 	path = libs/glm
 	url = https://github.com/g-truc/glm
+
+[submodule "libs/imgui"]
+	path = libs/imgui
+	url = https://github.com/umarbaevB/imgui/
