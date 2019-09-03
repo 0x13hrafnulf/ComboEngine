@@ -8,3 +8,6 @@
 [submodule "libs/imgui"]
 	path = libs/imgui
 	url = https://github.com/umarbaevB/imgui/
+[submodule "libs/glfw"]
+	path = libs/glfw
+	url = https://github.com/umarbaevB/glfw
