@@ -16,10 +16,13 @@ IncludeDir["SDL2"] = "libs/SDL2/include"
 IncludeDir["GLAD"] = "libs/glad/include"
 IncludeDir["ImGui"] = "libs/imgui"
 IncludeDir["GLM"] = "libs/glm"
+IncludeDir["GLFW"] = "libs/glfw/include"
+
 
 
 group "Dependencies"
     include "libs/glad"
+    include "libs/glfw"
     include "libs/imgui"
 group ""
 
@@ -58,24 +61,27 @@ project "Combo"
         "%{IncludeDir.GLAD}",
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.GLM}",
+        "%{IncludeDir.GLFW}"
       
     }
     links 
     {
         "Glad",
+        "GLFW",
         "ImGui"
+        
     }
     
     filter {"system:linux"}
         pic "on"
         buildoptions{
-            "`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
+            --"`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
             "-lGL","-lGLU",
             "-lGLEW", "-ldl",
             "-lm", "-lXrandr", "-lXi", "-lX11", "-lXxf86vm", "-lpthread"
         }
         linkoptions{
-            "`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
+            --"`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
             "-lGL","-lGLU",
             "-lGLEW", "-ldl",
             "-lm", "-lXrandr", "-lXi", "-lX11", "-lXxf86vm", "-lpthread"
@@ -137,17 +143,18 @@ project "Application"
         links 
         { 
             "Glad",
+            "GLFW",
             "ImGui"
             
         }
         buildoptions{
-            "`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
+            --"`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
             "-lGL","-lGLU",
             "-lGLEW", "-ldl", 
             "-lm", "-lXrandr", "-lXi", "-lX11", "-lXxf86vm", "-lpthread"
         }
         linkoptions{
-            "`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
+            --"`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
             "-lGL","-lGLU",
             "-lGLEW", "-ldl",
             "-lm", "-lXrandr", "-lXi", "-lX11", "-lXxf86vm", "-lpthread"

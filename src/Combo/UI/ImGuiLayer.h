@@ -2,7 +2,6 @@
 
 #include "../Layer.h"
 
-#include <SDL2/SDL.h>
 
 
 namespace Combo
@@ -21,9 +20,6 @@ namespace Combo
 
             void Start();
             void Stop();
-        private:
-            SDL_Window* m_Window;
-            SDL_GLContext m_Context; 
     };
 
 } 

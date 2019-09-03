@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SDL2/SDL.h>
+
 #include "../InputCodes.h"
 
 namespace Combo {
@@ -12,12 +12,12 @@ namespace Combo {
             InputManager(const InputManager&) = delete;
             InputManager& operator=(const InputManager&) = delete;
 
-            inline static bool IsKeyPressed(KeyboardKey key) 
+            inline static bool IsKeyPressed(int key) 
             {
                 return s_Instance->IsKeyPressedImpl(key);
             }
 
-            inline static bool IsMouseButtonPressed(MouseButton button)
+            inline static bool IsMouseButtonPressed(int button)
             {
                 return s_Instance->IsMouseButtonPressedImpl(button);
             }
@@ -41,9 +41,9 @@ namespace Combo {
         protected:
             InputManager() = default;
 
-            virtual bool IsKeyPressedImpl(KeyboardKey key);
+            virtual bool IsKeyPressedImpl(int key);
            
-            virtual bool IsMouseButtonPressedImpl(MouseButton button);
+            virtual bool IsMouseButtonPressedImpl(int button);
             virtual std::pair<float, float> GetMousePositionImpl();
             virtual float GetMouseXImpl();
             virtual float GetMouseYImpl();
