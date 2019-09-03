@@ -1,0 +1,6 @@
+build/
+build-interm/
+.vscode/
+.vs/
+Makefile
+CMakeLists.json

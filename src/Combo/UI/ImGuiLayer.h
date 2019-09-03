@@ -1,6 +1,9 @@
 #pragma once
 
-#include "Layer.h"
+#include "../Layer.h"
+
+#include <SDL2/SDL.h>
+
 
 namespace Combo
 {
@@ -12,15 +15,15 @@ namespace Combo
 
             virtual void Attach() override;
             virtual void Detach() override;
-            virtual void Update() override;
             virtual void ImGuiRender() override;
             
 
 
             void Start();
-            void Shutdown();
+            void Stop();
         private:
-
+            SDL_Window* m_Window;
+            SDL_GLContext m_Context; 
     };
 
 } 

@@ -27,11 +27,11 @@ namespace Combo
         SDL_Window* GetWindowPointer();
 
         
-        unsigned int GetWindowWidth() const override { return m_Properties.Width; }
-        unsigned int GetWindowHeight() const override { return m_Properties.Height; }
-        void* GetNativeWindow() const { return m_Window;}
-        
-        void SetEventCallback(const EventCallbackFunction& callback) override { m_Properties.EventCallback = callback;};
+        inline unsigned int GetWindowWidth() const override { return m_Properties.Width; }
+        inline unsigned int GetWindowHeight() const override { return m_Properties.Height; }
+        inline void* GetNativeWindow() const { return m_Window;}
+        inline void* GetContext() const { return m_Context; }
+        inline void SetEventCallback(const EventCallbackFunction& callback) override { m_Properties.EventCallback = callback;};
 
          //Event Filters
         int WindowCloseFilter(void* data, SDL_Event* e);

@@ -15,12 +15,12 @@ IncludeDir = {}
 IncludeDir["SDL2"] = "libs/SDL2/include"
 IncludeDir["GLAD"] = "libs/glad/include"
 IncludeDir["ImGui"] = "libs/imgui"
---IncludeDir["GLM"] = "libs/glm"
+IncludeDir["GLM"] = "libs/glm"
 
 
 group "Dependencies"
     include "libs/glad"
---    include "libs/imgui"
+    include "libs/imgui"
 group ""
 
 
@@ -44,6 +44,8 @@ project "Combo"
     {
         "src/%{prj.name}/**.h",
         "src/%{prj.name}/**.cpp",
+        "libs/glm/glm/**.hpp",
+        "libs/glm/glm/**.inl"
     }
     
     removefiles("src/%{prj.name}/not_used/**")
@@ -53,22 +55,30 @@ project "Combo"
         "src/%{prj.name}/",
         "libs/spdlog/include/",
         "libs/",
-        "%{IncludeDir.GLAD}"
-        "%{IncludeDir.ImGui}"
+        "%{IncludeDir.GLAD}",
+        "%{IncludeDir.ImGui}",
+        "%{IncludeDir.GLM}",
+      
     }
-    links {"Glad", "ImGui"}
+    links 
+    {
+        "Glad",
+        "ImGui"
+    }
     
     filter {"system:linux"}
         pic "on"
         buildoptions{
-            "-lSDL2", "-lSDL2main",
+            "`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
             "-lGL","-lGLU",
-            "-lGLEW", "-ldl", "-lpthread"
+            "-lGLEW", "-ldl",
+            "-lm", "-lXrandr", "-lXi", "-lX11", "-lXxf86vm", "-lpthread"
         }
         linkoptions{
-            "-lSDL2", "-lSDL2main",
-             "-lGL","-lGLU",
-            "-lGLEW", "-ldl", "-lpthread"
+            "`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
+            "-lGL","-lGLU",
+            "-lGLEW", "-ldl",
+            "-lm", "-lXrandr", "-lXi", "-lX11", "-lXxf86vm", "-lpthread"
         }
 
    filter "system:windows" --includedirs {"%{IncludeDir.SDL2}"} libdirs {"%{LibDir.SDL2}"}
@@ -114,7 +124,9 @@ project "Application"
     {
         "src/%{prj.name}/",
         "src/",
-        "libs/spdlog/include/"
+        "libs/spdlog/include/",
+        "libs/",
+        "%{IncludeDir.GLM}",
     }
 
     links
@@ -122,16 +134,23 @@ project "Application"
         "Combo"
     }
     filter {"system:linux"}
-        links { "Glad" }
+        links 
+        { 
+            "Glad",
+            "ImGui"
+            
+        }
         buildoptions{
-            "-lSDL2", "-lSDL2main",
+            "`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
             "-lGL","-lGLU",
-            "-lGLEW", "-ldl", "-lpthread"
+            "-lGLEW", "-ldl", 
+            "-lm", "-lXrandr", "-lXi", "-lX11", "-lXxf86vm", "-lpthread"
         }
         linkoptions{
-            "-lSDL2", "-lSDL2main",
+            "`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
             "-lGL","-lGLU",
-            "-lGLEW", "-ldl", "-lpthread"
+            "-lGLEW", "-ldl",
+            "-lm", "-lXrandr", "-lXi", "-lX11", "-lXxf86vm", "-lpthread"
         }
 
     filter "configurations:Debug"

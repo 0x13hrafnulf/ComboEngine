@@ -41,7 +41,8 @@ namespace Combo
         virtual unsigned int GetWindowWidth() const = 0;
         virtual unsigned int GetWindowHeight() const = 0;
         virtual void* GetNativeWindow() const = 0;
-
+        virtual void* GetContext() const = 0;
+        
         static Window* CreateWindow(const WindowAttributes& attrib = WindowAttributes());
     
 

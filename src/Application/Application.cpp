@@ -1,4 +1,5 @@
 #include "Combo/Combo.h"
+#include "imgui/imgui.h"
 
 class SandboxLayer : public Combo::Layer
 {
@@ -11,6 +12,12 @@ class SandboxLayer : public Combo::Layer
         void Update() override
         {
             CLIENT_INFO_LOG("Sandbox::Update");
+        }
+        virtual void ImGuiRender() override
+        {
+            ImGui::Begin("Test");
+            ImGui::Text("Hello world!");
+            ImGui::End();
         }
         void OnEvent(Combo::Event& event) override
         {

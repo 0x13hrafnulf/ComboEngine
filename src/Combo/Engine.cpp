@@ -6,13 +6,23 @@
 
 namespace Combo
 {
+    Engine* Engine::s_Instance = nullptr;
+
     //Need to find a lambda way to do it
     #define BIND_FN(x) std::bind(&Engine::x, this, std::placeholders::_1)
 
     Engine::Engine()
     {
+        if(s_Instance)COMBO_ERROR_LOG("Application already exists!");
+
+        s_Instance = this;
+
         m_Window = std::unique_ptr<Window>(Window::CreateWindow());
         m_Window->SetEventCallback(BIND_FN(OnEvent));
+
+        m_ImGuiLayer = new ImGuiLayer();
+        PushOverLay(m_ImGuiLayer);
+
     }
 
     void Engine::OnEvent(Event& event)
@@ -43,6 +53,13 @@ namespace Combo
             {
                 layer->Update();
             }
+
+            m_ImGuiLayer->Start();
+            for(Layer* layer : m_LayerStack)
+            {
+                layer->ImGuiRender();
+            }
+            m_ImGuiLayer->Stop();
             m_Window->Update();
         }
 

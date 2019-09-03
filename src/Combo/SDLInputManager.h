@@ -1,5 +1,5 @@
-
-#include "InputManager.h"
+#pragma once
+#include "InputManager/InputManager.h"
 
 namespace Combo {
     class SDLInputManager : public InputManager

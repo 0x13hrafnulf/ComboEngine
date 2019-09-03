@@ -5,7 +5,6 @@
 #include "InputManager/MouseEvent.h"
 
 #include "glad/glad.h"
-
 namespace Combo {
 
     static bool s_SDLInitialized = false;
@@ -46,8 +45,8 @@ namespace Combo {
         }
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-        // SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-        // SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 
         // Create window with graphics context
         SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -70,7 +69,7 @@ namespace Combo {
             exit(1);
         }
 
-        int status = gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress);
+        int status = gladLoadGL(); //gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress);
 
         if(!status)
         {
@@ -90,9 +89,9 @@ namespace Combo {
         //SDL_AddEventWatch(WindowCloseFilter, &m_Properties);
         
 
-        glClearColor(0.0f,0.0f,1.0f,1.0f);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        // glClearColor(0.0f,0.0f,1.0f,1.0f);
+        // glEnable(GL_BLEND);
+        // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
         
