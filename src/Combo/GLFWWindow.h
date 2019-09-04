@@ -19,12 +19,6 @@ namespace Combo
 
         void SetVsync(bool enabled) override;
         bool IsVsync() const override;
-
-        int GetWindowWidth();
-        int GetWindowHeight();
-        const std::string& GetWindowTitle();
-        GLFWwindow* GetWindowPointer();
-
         
         inline unsigned int GetWindowWidth() const override { return m_Properties.Width; }
         inline unsigned int GetWindowHeight() const override { return m_Properties.Height; }
@@ -51,12 +45,6 @@ namespace Combo
         };
 
         WindowProperties m_Properties;
-
-        
-       
-
-
-
 
     };
 

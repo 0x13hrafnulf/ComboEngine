@@ -41,12 +41,12 @@ namespace Combo {
         protected:
             InputManager() = default;
 
-            virtual bool IsKeyPressedImpl(int key);
+            virtual bool IsKeyPressedImpl(int key) = 0;
            
-            virtual bool IsMouseButtonPressedImpl(int button);
-            virtual std::pair<float, float> GetMousePositionImpl();
-            virtual float GetMouseXImpl();
-            virtual float GetMouseYImpl();
+            virtual bool IsMouseButtonPressedImpl(int button) = 0;
+            virtual std::pair<float, float> GetMousePositionImpl() = 0;
+            virtual float GetMouseXImpl() = 0;
+            virtual float GetMouseYImpl() = 0;
             
             // virtual bool IsKeyReleasedImpl(KeyboardKey key);
             // virtual bool IsKeyDownImpl(KeyboardKey key);

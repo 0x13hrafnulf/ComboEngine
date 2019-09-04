@@ -8,7 +8,8 @@ namespace Combo
 
     class EventManager//To be modified as Singleton to manage all events as the system
     {
-
+        template<typename T>
+        using EventFunction = std::function<bool(T&)>;
         public:
             EventManager(Event& event) : 
                 m_Event(event)
@@ -16,7 +17,7 @@ namespace Combo
             }
 
             template<typename T>
-            bool DispatchEvent(std::function<bool(T&)> func)//
+            bool DispatchEvent(EventFunction<T> func)//
             {
                 if(m_Event.GetEventType() == T::GetStaticEventType())
                 {

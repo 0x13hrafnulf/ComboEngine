@@ -1,4 +1,3 @@
-
 #include "ImGuiLayer.h"
 #include "imgui.h"
 #include "examples/imgui_impl_glfw.h"
@@ -50,7 +49,7 @@ namespace Combo
 
 		// Setup Platform/Renderer bindings
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
-		ImGui_ImplOpenGL3_Init("#version 430");
+		ImGui_ImplOpenGL3_Init("#version 450");
     }
     void ImGuiLayer::Detach() 
     {

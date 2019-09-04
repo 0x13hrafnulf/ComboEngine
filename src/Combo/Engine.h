@@ -17,8 +17,8 @@ namespace Combo
 
             void Run();
             void OnEvent(Event& event);
-            bool WindowClose(WindowCloseEvent& event);
-            bool WindowResize(WindowResizeEvent& event);
+
+           
           
 
             void PushLayer(Layer* layer);
@@ -31,6 +31,7 @@ namespace Combo
             inline static Engine& Get() { return *s_Instance; }
 
        private:
+            bool WindowClose(WindowCloseEvent& event);   
             bool m_Running = true;
             std::unique_ptr<Window> m_Window;
             LayerStack m_LayerStack;

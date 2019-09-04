@@ -49,14 +49,15 @@ namespace Combo {
             }
             s_GLFWInitialized = true;
         }
-        // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-		// glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-		// glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         // Create window with graphics context
         m_Window = glfwCreateWindow((int)attribs.Width, (int)attribs.Height, attribs.Title.c_str(), nullptr, nullptr);
         glfwMakeContextCurrent(m_Window);
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		glfwSetWindowUserPointer(m_Window, &m_Properties);
         if(!status)
         {
             COMBO_ERROR_LOG("Failed to initialize GLAD!");

@@ -26,7 +26,7 @@ namespace Combo
     void LayerStack::PopLayer(Layer* layer)
     {
         auto it = std::find(m_Layers.begin(), m_Layers.begin() + m_InsertLayerIndex, layer);
-        if(it != m_Layers.end() + m_InsertLayerIndex)
+        if(it != m_Layers.end())
         {
             layer->Detach();
             m_Layers.erase(it);
@@ -36,7 +36,7 @@ namespace Combo
     void LayerStack::PopOverLay(Layer* overlay)
     {
         auto it = std::find(m_Layers.begin(), m_Layers.begin() + m_InsertLayerIndex, overlay);
-        if(it != m_Layers.end() + m_InsertLayerIndex)
+        if(it != m_Layers.end())
         {
             overlay->Detach();
             m_Layers.erase(it);

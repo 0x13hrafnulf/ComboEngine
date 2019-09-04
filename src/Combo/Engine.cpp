@@ -9,7 +9,7 @@ namespace Combo
     Engine* Engine::s_Instance = nullptr;
 
     //Need to find a lambda way to do it
-    #define BIND_FN(x) std::bind(&Engine::x, this, std::placeholders::_1)
+#define BIND_FN(x) std::bind(&Engine::x, this, std::placeholders::_1)
 
     Engine::Engine()
     {
@@ -73,20 +73,12 @@ namespace Combo
     }
     void Engine::PushOverLay(Layer* layer)
     {
-        m_LayerStack.PopLayer(layer);
+        m_LayerStack.PushOverLay(layer);
     }
 
     bool Engine::WindowClose(WindowCloseEvent& event)
     {
         m_Running = false;
-        return true;
-    }
-    
-    bool Engine::WindowResize(WindowResizeEvent& event)
-    {
-        //Change camera view after resizing
-        //glviewport(0,0,width, height);
-
         return true;
     }
 

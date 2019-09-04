@@ -7,6 +7,8 @@
 
 namespace Combo {
     
+    InputManager* InputManager::s_Instance = new GLFWInputManager();
+
     bool GLFWInputManager::IsKeyPressedImpl(int key)
     {
         auto window = static_cast<GLFWwindow*>(Engine::Get().GetWindow().GetNativeWindow());

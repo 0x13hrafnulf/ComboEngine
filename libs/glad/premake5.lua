@@ -2,7 +2,7 @@ project "Glad"
     kind "StaticLib"
     language "C"
     staticruntime "on"
-    systemversion "latest"
+    
     
     targetdir ("build/" .. outputdir .. "/%{prj.name}")
     objdir ("build-interm/" .. outputdir .. "/%{prj.name}")
@@ -21,6 +21,8 @@ project "Glad"
     filter {"system:linux"}
         pic "on"
 
+    filter {"system:windows"} systemversion "latest"
+    
     filter "configurations:Debug"
         runtime "Debug"
         symbols "on"

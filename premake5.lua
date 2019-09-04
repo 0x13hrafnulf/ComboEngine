@@ -12,7 +12,6 @@ workspace "Combo"
     outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
         
 IncludeDir = {}
-IncludeDir["SDL2"] = "libs/SDL2/include"
 IncludeDir["GLAD"] = "libs/glad/include"
 IncludeDir["ImGui"] = "libs/imgui"
 IncludeDir["GLM"] = "libs/glm"
@@ -33,7 +32,7 @@ project "Combo"
     location "src/Combo"
     kind "StaticLib" --StaticLib/SharedLib
     language "C++"
-    cppdialect "C++11" --C++11/14/17
+    cppdialect "C++14" --C++11/14/17
     staticruntime "on"
     systemversion "latest"
 
@@ -74,19 +73,18 @@ project "Combo"
     
     filter {"system:linux"}
         pic "on"
-        buildoptions{
-            --"`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
-            "-lGL","-lGLU",
-            "-lGLEW", "-ldl",
-            "-lm", "-lXrandr", "-lXi", "-lX11", "-lXxf86vm", "-lpthread"
+        links
+        {
+            "Xrandr",
+            "Xi",
+            "GLEW",
+            "GLU",
+            "GL",
+            "X11",
+            "pthread",
+            "Xxf86vm",
+            "dl"  
         }
-        linkoptions{
-            --"`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
-            "-lGL","-lGLU",
-            "-lGLEW", "-ldl",
-            "-lm", "-lXrandr", "-lXi", "-lX11", "-lXxf86vm", "-lpthread"
-        }
-
    filter "system:windows" --includedirs {"%{IncludeDir.SDL2}"} libdirs {"%{LibDir.SDL2}"}
         links{
             "opengl32.lib"
@@ -113,7 +111,7 @@ project "Application"
     location "src/Application"    
     kind "ConsoleApp" --StaticLib/SharedLib
     language "C++"
-    cppdialect "C++11" --C++11/14/17
+    cppdialect "C++14" --C++11/14/17
     staticruntime "on"
     systemversion "latest"
 
@@ -144,22 +142,17 @@ project "Application"
         { 
             "Glad",
             "GLFW",
-            "ImGui"
-            
+            "ImGui",
+            "Xrandr",
+            "Xi",
+            "GLEW",
+            "GLU",
+            "GL",
+            "X11",
+            "pthread",
+            "Xxf86vm",
+            "dl"         
         }
-        buildoptions{
-            --"`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
-            "-lGL","-lGLU",
-            "-lGLEW", "-ldl", 
-            "-lm", "-lXrandr", "-lXi", "-lX11", "-lXxf86vm", "-lpthread"
-        }
-        linkoptions{
-            --"`sdl2-config --cflags --libs`", -- "-lSDL2", "-lSDL2main",
-            "-lGL","-lGLU",
-            "-lGLEW", "-ldl",
-            "-lm", "-lXrandr", "-lXi", "-lX11", "-lXxf86vm", "-lpthread"
-        }
-
     filter "configurations:Debug"
 		defines "COMBO_DEBUG"
 		runtime "Debug"
