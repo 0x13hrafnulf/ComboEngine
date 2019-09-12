@@ -23,10 +23,11 @@ namespace Combo
         m_Layers.emplace_back(overlay);
         overlay->Attach();
     }
+    //Need to delete layers and overlays, either make boolean or return pointer to them
     void LayerStack::PopLayer(Layer* layer)
     {
         auto it = std::find(m_Layers.begin(), m_Layers.begin() + m_InsertLayerIndex, layer);
-        if(it != m_Layers.end())
+        if(it != m_Layers.begin() + m_InsertLayerIndex)
         {
             layer->Detach();
             m_Layers.erase(it);
