@@ -1,6 +1,13 @@
 build/
 build-interm/
-.vscode/
-.vs/
 Makefile
 CMakeLists.json
+
+#Visual Studio
+*.user
+.vscode/
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user 
