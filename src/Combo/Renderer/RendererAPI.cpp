@@ -1,4 +1,4 @@
-#include "./combopch.h"
+#include "../combopch.h"
 #include "RendererAPI.h"
 
 namespace Combo
