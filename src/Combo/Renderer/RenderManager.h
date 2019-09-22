@@ -1,15 +1,23 @@
 #pragma once
 
+#include "RenderCommand.h"
+#include "Shader.h"
+
 
 namespace Combo
 {
     class RenderManager
     {
-        static void BeginScene();
-        static void EndScene();
+        public:
+            static void Init();
 
-        static void Submit();
+            static void BeginScene();
+            static void EndScene();
 
-        
+            static void Submit();
+
+            inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
+        private:
+            
     };        
 }

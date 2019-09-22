@@ -3,6 +3,8 @@
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"
 
+
+
 //Engine macros
 #define COMBO_TRACE_LOG(...) Combo::LogManager::GetComboLogManager()->trace(__VA_ARGS__)
 #define COMBO_INFO_LOG(...)  Combo::LogManager::GetComboLogManager()->info(__VA_ARGS__)
@@ -16,6 +18,7 @@
 #define CLIENT_WARN_LOG(...)  Combo::LogManager::GetClientLogManager()->warn(__VA_ARGS__)
 #define CLIENT_ERROR_LOG(...) Combo::LogManager::GetClientLogManager()->error(__VA_ARGS__)
 #define CLIENT_FATAL_LOG(...) Combo::LogManager::GetClientLogManager()->critical(__VA_ARGS__)
+
 
 
 namespace Combo {
