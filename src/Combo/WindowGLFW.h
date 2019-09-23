@@ -4,16 +4,17 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "Renderer/GraphicsContext.h"
 
 namespace Combo
 {  
 
-    class GLFWWindow : public Window
+    class WindowGLFW : public Window
     {
         public:
 
-        GLFWWindow(const WindowAttributes& attribs);
-        ~GLFWWindow();
+        WindowGLFW(const WindowAttributes& attribs);
+        ~WindowGLFW();
 
         void Update() override;
 
@@ -33,6 +34,7 @@ namespace Combo
 
         //Data
         GLFWwindow* m_Window;
+        GraphicsContext* m_Context;
 
         struct WindowProperties
         {

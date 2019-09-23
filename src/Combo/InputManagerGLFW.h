@@ -2,7 +2,7 @@
 #include "InputManager/InputManager.h"
 
 namespace Combo {
-    class GLFWInputManager : public InputManager
+    class InputManagerGLFW : public InputManager
     {
         public:
 

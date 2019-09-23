@@ -1,5 +1,5 @@
 #include "combopch.h"
-#include "GLFWInputManager.h"
+#include "InputManagerGLFW.h"
 
 #include "Engine.h"
 #include <GLFW/glfw3.h>
@@ -7,9 +7,9 @@
 
 namespace Combo {
     
-    InputManager* InputManager::s_Instance = new GLFWInputManager();
+    InputManager* InputManager::s_Instance = new InputManagerGLFW();
 
-    bool GLFWInputManager::IsKeyPressedImpl(int key)
+    bool InputManagerGLFW::IsKeyPressedImpl(int key)
     {
         auto window = static_cast<GLFWwindow*>(Engine::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetKey(window, key);
@@ -17,13 +17,13 @@ namespace Combo {
     }
     
         
-    bool GLFWInputManager::IsMouseButtonPressedImpl(int button)
+    bool InputManagerGLFW::IsMouseButtonPressedImpl(int button)
     {
         auto window = static_cast<GLFWwindow*>(Engine::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetMouseButton(window, button);
 		return state == GLFW_PRESS;
     }
-    std::pair<float, float> GLFWInputManager::GetMousePositionImpl()
+    std::pair<float, float> InputManagerGLFW::GetMousePositionImpl()
     {
         auto window = static_cast<GLFWwindow*>(Engine::Get().GetWindow().GetNativeWindow());
 		double xpos, ypos;
@@ -31,11 +31,11 @@ namespace Combo {
 
 		return { (float)xpos, (float)ypos };
     }
-    float GLFWInputManager::GetMouseXImpl()
+    float InputManagerGLFW::GetMouseXImpl()
     {
         return GetMousePositionImpl().first;
     }
-    float GLFWInputManager::GetMouseYImpl()
+    float InputManagerGLFW::GetMouseYImpl()
     {
         return GetMousePositionImpl().second;
     }

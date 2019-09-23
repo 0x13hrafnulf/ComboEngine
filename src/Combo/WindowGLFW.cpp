@@ -1,9 +1,11 @@
 #include "combopch.h"
-#include "GLFWWindow.h"
+#include "WindowGLFW.h"
 
 #include "InputManager/WindowEvent.h"
 #include "InputManager/KeyboardEvent.h"
 #include "InputManager/MouseEvent.h"
+
+#include "OpenGL/OpenGLContext.h"
 
 namespace Combo {
 
@@ -14,22 +16,22 @@ namespace Combo {
         COMBO_ERROR_LOG("GLFWError[{0}]: {1}", error, info);
     }
 
-    Window* Window::CreateWindow(const WindowAttributes& attribs)
+    Window* Window::Create(const WindowAttributes& attribs)
     {
-        return new GLFWWindow(attribs);
+        return new WindowGLFW(attribs);
     }
 
-    GLFWWindow::GLFWWindow(const WindowAttributes& attribs)
+    WindowGLFW::WindowGLFW(const WindowAttributes& attribs)
     {
         Init(attribs);
     }
 
-    GLFWWindow::~GLFWWindow()
+    WindowGLFW::~WindowGLFW()
     {
         Shutdown();
     }
     
-    void GLFWWindow::Init(const WindowAttributes& attribs)
+    void WindowGLFW::Init(const WindowAttributes& attribs)
     {
         m_Properties.Width = attribs.Width;
         m_Properties.Height = attribs.Height;
@@ -55,21 +57,11 @@ namespace Combo {
 
         // Create window with graphics context
         m_Window = glfwCreateWindow((int)attribs.Width, (int)attribs.Height, attribs.Title.c_str(), nullptr, nullptr);
-        glfwMakeContextCurrent(m_Window);
-        int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		glfwSetWindowUserPointer(m_Window, &m_Properties);
-        if(!status)
-        {
-            COMBO_ERROR_LOG("Failed to initialize GLAD!");
-            exit(1);
-        }
-        COMBO_INFO_LOG("   Vendor: {0}", glGetString(GL_VENDOR));
-        COMBO_INFO_LOG("   Renderer: {0}", glGetString(GL_RENDERER));
-        COMBO_INFO_LOG("   Version: {0}", glGetString(GL_VERSION));
-		
-				
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
+		glfwSetWindowUserPointer(m_Window, &m_Properties);		
         SetVsync(true);
-
+		
         //Create glfw callbacks
         glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 		{
@@ -165,19 +157,19 @@ namespace Combo {
         
     }
     
-    void GLFWWindow::Update()
+    void WindowGLFW::Update()
     {
        glfwPollEvents();
-       glfwSwapBuffers(m_Window);
+       m_Context->SwapBuffers();
     }
     
     
-    void GLFWWindow::Shutdown()
+    void WindowGLFW::Shutdown()
     {
         glfwDestroyWindow(m_Window);
     }
 
-    void GLFWWindow::SetVsync(bool enabled)
+    void WindowGLFW::SetVsync(bool enabled)
     {
         if(enabled) glfwSwapInterval(1);
         else glfwSwapInterval(0);
@@ -185,7 +177,7 @@ namespace Combo {
         m_Properties.Vsync = enabled;
     }
 
-    bool GLFWWindow::IsVsync() const
+    bool WindowGLFW::IsVsync() const
     {
         return m_Properties.Vsync;
     }
