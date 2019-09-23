@@ -7,7 +7,7 @@ namespace Combo
     class OpenGLVertexBuffer : public VertexBuffer
     {
         public:
-        
+
             OpenGLVertexBuffer(float* vertices, uint32_t size);
             virtual ~OpenGLVertexBuffer();
 
@@ -24,7 +24,7 @@ namespace Combo
     class OpenGLIndexBuffer : public IndexBuffer
     {
         public:
-            OpenGLIndexBuffer(float* indices, uint32_t size);
+            OpenGLIndexBuffer(float* indices, uint32_t count);
             virtual ~OpenGLIndexBuffer();
 
             virtual void Bind() const override;

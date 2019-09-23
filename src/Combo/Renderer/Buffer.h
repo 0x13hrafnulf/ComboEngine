@@ -144,7 +144,7 @@ namespace Combo
             virtual void Unbind() const = 0;
             virtual uint32_t GetCount() const = 0;
 
-            static IndexBuffer* Create(float* indices, uint32_t size); 
+            static IndexBuffer* Create(float* indices, uint32_t count); 
    
 
     };

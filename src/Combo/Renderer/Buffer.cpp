@@ -18,12 +18,12 @@ namespace Combo
     }
 
 
-    IndexBuffer* IndexBuffer::Create(float* indices, uint32_t size)
+    IndexBuffer* IndexBuffer::Create(float* indices, uint32_t count)
     {
         switch(RenderManager::GetAPI())
         {
             case RendererAPI::API::NONE: COMBO_ERROR_LOG("RendererAPI is not supported!"); return nullptr;
-            case RendererAPI::API::OpenGL: return new OpenGLIndexBuffer(indices, size);
+            case RendererAPI::API::OpenGL: return new OpenGLIndexBuffer(indices, count);
             default: COMBO_ERROR_LOG("Unknown RenderAPI!"); return nullptr;
         }
         COMBO_ERROR_LOG("Unknown RenderAPI!");
