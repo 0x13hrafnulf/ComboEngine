@@ -14,8 +14,6 @@ namespace Combo
         glCreateBuffers(1, &m_RendererID);
         glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
         glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
-
-
     }
 
     OpenGLVertexBuffer::~OpenGLVertexBuffer()
@@ -32,9 +30,6 @@ namespace Combo
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
     
-
-
-
     /*--------------------------------------------
     ----------------IndexBuffer-------------------
     --------------------------------------------*/
@@ -45,7 +40,6 @@ namespace Combo
         glCreateBuffers(1, &m_RendererID);
         glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
         glBufferData(GL_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
-
     }
     OpenGLIndexBuffer::~OpenGLIndexBuffer()
     {
