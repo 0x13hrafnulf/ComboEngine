@@ -14,7 +14,7 @@ namespace Combo
             virtual void Bind() const override;
             virtual void Unbind() const override;
 
-            virtual const std::string& GetShaderName() const override;
+            //virtual const std::string& GetShaderName() const override;
 
             void UploadUniformFloat(const std::string& name, float value);
             void UploadUniformFloat2(const std::string& name, const glm::vec2& values);

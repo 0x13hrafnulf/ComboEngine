@@ -1,4 +1,4 @@
-#include "../combopch.h"
+#include "combopch.h"
 #include "RenderManager.h"
 
 #include "../OpenGL/OpenGLShader.h"

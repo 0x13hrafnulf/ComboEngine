@@ -1,4 +1,4 @@
-#include "../combopch.h"
+#include "combopch.h"
 #include "OpenGLContext.h"
 
 #include <glad/glad.h>

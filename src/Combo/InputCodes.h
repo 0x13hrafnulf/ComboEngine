@@ -1,4 +1,5 @@
 #pragma once
+#include <GLFW/glfw3.h>
 
 namespace Combo
 {
@@ -135,9 +136,9 @@ namespace Combo
         MOUSEBUTTON_3       = GLFW_MOUSE_BUTTON_3,         
         MOUSEBUTTON_4       = GLFW_MOUSE_BUTTON_4,         
         MOUSEBUTTON_5       = GLFW_MOUSE_BUTTON_5,         
-        MOUSEBUTTON_5       = GLFW_MOUSE_BUTTON_6,         
-        MOUSEBUTTON_6       = GLFW_MOUSE_BUTTON_7,         
-        MOUSEBUTTON_7       = GLFW_MOUSE_BUTTON_8,         
+        MOUSEBUTTON_6       = GLFW_MOUSE_BUTTON_6,         
+        MOUSEBUTTON_7       = GLFW_MOUSE_BUTTON_7,         
+        MOUSEBUTTON_8       = GLFW_MOUSE_BUTTON_8,         
         MOUSEBUTTON_LAST    = GLFW_MOUSE_BUTTON_LAST,  
         MOUSEBUTTON_LEFT    = GLFW_MOUSE_BUTTON_LEFT, 
         MOUSEBUTTON_RIGHT   = GLFW_MOUSE_BUTTON_RIGHT, 

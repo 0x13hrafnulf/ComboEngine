@@ -131,6 +131,7 @@ project "Application"
         "libs/spdlog/include/",
         "libs/",
         "%{IncludeDir.GLM}",
+        "%{IncludeDir.GLFW}"
     }
 
     links

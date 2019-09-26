@@ -1,4 +1,4 @@
-#include "../combopch.h"
+#include "combopch.h"
 
 #include "VertexArray.h"
 #include "RenderManager.h"
