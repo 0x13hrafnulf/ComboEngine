@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Renderer/Buffer.h"
+#include "Renderer/Buffer.h"
 
 namespace Combo
 {
@@ -24,7 +24,7 @@ namespace Combo
     class OpenGLIndexBuffer : public IndexBuffer
     {
         public:
-            OpenGLIndexBuffer(float* indices, uint32_t count);
+            OpenGLIndexBuffer(uint32_t* indices, uint32_t count);
             virtual ~OpenGLIndexBuffer();
 
             virtual void Bind() const override;

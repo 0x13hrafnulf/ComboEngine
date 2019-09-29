@@ -50,7 +50,7 @@ namespace Combo
         //
         BufferElement() {}
 
-        BufferElement(ShaderDataType type, std::string name, bool normalized)
+        BufferElement(ShaderDataType type, std::string name, bool normalized = false)
 
         : m_Name(name),
           m_Type(type),
@@ -85,7 +85,7 @@ namespace Combo
     class BufferLayout
     {
         public:
-            BufferLayout();
+			BufferLayout() {}
 
             BufferLayout(const std::initializer_list<BufferElement>& elements)
             :m_BufferElements(elements)
@@ -144,7 +144,7 @@ namespace Combo
             virtual void Unbind() const = 0;
             virtual uint32_t GetCount() const = 0;
 
-            static IndexBuffer* Create(float* indices, uint32_t count); 
+            static IndexBuffer* Create(uint32_t* indices, uint32_t count); 
    
 
     };

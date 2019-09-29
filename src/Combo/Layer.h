@@ -2,7 +2,7 @@
 
 
 #include "InputManager/Event.h"
-
+#include "Timestep.h"
 
 namespace Combo
 {
@@ -15,7 +15,7 @@ namespace Combo
 
             virtual void Attach(){}
             virtual void Detach(){}
-            virtual void Update(){}
+            virtual void Update(Timestep tstep){}
             virtual void OnEvent(Event& event){}
             virtual void ImGuiRender() {}
             

@@ -5,6 +5,7 @@
 #include "InputManager/WindowEvent.h"
 #include "LayerStack.h"
 #include "UI/ImGuiLayer.h"
+#include "Timestep.h"
 
 namespace Combo
 {
@@ -17,9 +18,6 @@ namespace Combo
 
             void Run();
             void OnEvent(Event& event);
-
-           
-          
 
             void PushLayer(Layer* layer);
             void PushOverLay(Layer* layer);
@@ -36,7 +34,7 @@ namespace Combo
             std::unique_ptr<Window> m_Window;
             LayerStack m_LayerStack;
             ImGuiLayer* m_ImGuiLayer;   
-       
+            Timestep m_LastFrame = 0.0f;
        
             static Engine* s_Instance;
    };

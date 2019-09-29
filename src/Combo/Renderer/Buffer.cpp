@@ -18,7 +18,7 @@ namespace Combo
     }
 
 
-    IndexBuffer* IndexBuffer::Create(float* indices, uint32_t count)
+    IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t count)
     {
         switch(RenderManager::GetAPI())
         {

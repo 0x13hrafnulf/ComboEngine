@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "LogManager.h"
 #include "InputManager/EventManager.h"
+#include "GLFW/glfw3.h"
 
 namespace Combo
 {
@@ -49,9 +50,14 @@ namespace Combo
 
         while(m_Running)
         {
+            float time = (float)glfwGetTime();
+            Timestep ts = time - m_LastFrame;
+            m_LastFrame = time;
+
+
             for(Layer* layer : m_LayerStack)
             {
-                layer->Update();
+                layer->Update(ts);
             }
 
             m_ImGuiLayer->Start();

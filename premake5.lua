@@ -57,16 +57,15 @@ project "Combo"
         "src/%{prj.name}/",
         "libs/spdlog/include/",
         "libs/",
+        "%{IncludeDir.GLFW}",
         "%{IncludeDir.GLAD}",
         "%{IncludeDir.ImGui}",
-        "%{IncludeDir.GLM}",
-        "%{IncludeDir.GLFW}"
-      
+        "%{IncludeDir.GLM}"
     }
     links 
     {
-        "Glad",
         "GLFW",
+        "Glad",
         "ImGui"
         
     }
@@ -128,6 +127,7 @@ project "Application"
     {
         "src/%{prj.name}/",
         "src/",
+        "src/Combo/",
         "libs/spdlog/include/",
         "libs/",
         "%{IncludeDir.GLM}",
