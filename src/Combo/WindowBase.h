@@ -8,8 +8,8 @@ namespace Combo
     struct WindowAttributes
     {
         WindowAttributes(const std::string& title = "Combo Engine", 
-        unsigned int width = 860, 
-        unsigned int height = 640)
+        unsigned int width = 1024, 
+        unsigned int height = 720)
         :Title(title),
          Width(width),
          Height(height)

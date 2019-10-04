@@ -53,9 +53,12 @@ namespace Combo
         for(const auto& element : layout)
         {
 			glEnableVertexAttribArray(m_VertexBufferIndex);
-            glVertexAttribPointer(m_VertexBufferIndex, element.GetCount(), 
-                                  ShaderDataTypeToOpenGLBaseType(element.m_Type), element.m_Normalized ? GL_TRUE : GL_FALSE, 
-                                  layout.GetStride(), (const void*) (intptr_t)element.m_Offset);
+            glVertexAttribPointer(m_VertexBufferIndex, 
+								  element.GetCount(), 
+                                  ShaderDataTypeToOpenGLBaseType(element.m_Type), 
+				                  element.m_Normalized ? GL_TRUE : GL_FALSE, 
+                                  layout.GetStride(), 
+								  (const void*) element.m_Offset);
             ++m_VertexBufferIndex;
         }
 

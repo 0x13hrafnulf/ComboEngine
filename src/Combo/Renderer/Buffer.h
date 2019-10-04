@@ -4,7 +4,7 @@ namespace Combo
 {
     enum class ShaderDataType
     {
-        None,
+        None = 0,
         Float,
         Float2,
         Float3,
@@ -22,9 +22,9 @@ namespace Combo
     {
         switch (type)
         {
-            case ShaderDataType::Float:  return 4 * 4;
-            case ShaderDataType::Float2: return 4 * 4;
-            case ShaderDataType::Float3: return 4 * 4;
+            case ShaderDataType::Float:  return 4;
+            case ShaderDataType::Float2: return 4 * 2;
+            case ShaderDataType::Float3: return 4 * 3;
             case ShaderDataType::Float4: return 4 * 4;
             case ShaderDataType::Mat3:   return 4 * 3 * 3;
             case ShaderDataType::Mat4:   return 4 * 4 * 4;
@@ -50,8 +50,7 @@ namespace Combo
         //
         BufferElement() {}
 
-        BufferElement(ShaderDataType type, std::string name, bool normalized = false)
-
+        BufferElement(ShaderDataType type,const std::string& name, bool normalized = false)
         : m_Name(name),
           m_Type(type),
           m_Size(GetShaderDataTypeSize(type)),

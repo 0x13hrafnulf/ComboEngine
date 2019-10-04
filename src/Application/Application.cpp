@@ -59,10 +59,13 @@ class SandboxLayer : public Combo::Layer
 			
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
+
 			uniform mat4 u_ViewProjection;
 			uniform mat4 u_Transform;
+
 			out vec3 v_Position;
 			out vec4 v_Color;
+
 			void main()
 			{
 				v_Position = a_Position;
@@ -75,8 +78,10 @@ class SandboxLayer : public Combo::Layer
 			#version 330 core
 			
 			layout(location = 0) out vec4 color;
+
 			in vec3 v_Position;
 			in vec4 v_Color;
+
 			void main()
 			{
 				color = vec4(v_Position * 0.5 + 0.5, 1.0);
@@ -90,9 +95,12 @@ class SandboxLayer : public Combo::Layer
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
+
 			uniform mat4 u_ViewProjection;
 			uniform mat4 u_Transform;
+
 			out vec3 v_Position;
+
 			void main()
 			{
 				v_Position = a_Position;
@@ -104,9 +112,11 @@ class SandboxLayer : public Combo::Layer
 			#version 330 core
 			
 			layout(location = 0) out vec4 color;
+
 			in vec3 v_Position;
 			
 			uniform vec3 u_Color;
+
 			void main()
 			{
 				color = vec4(u_Color, 1.0);
@@ -119,46 +129,46 @@ class SandboxLayer : public Combo::Layer
         {
             CLIENT_INFO_LOG("Sandbox::Update");
             if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_LEFT))
-			m_CameraPosition.x -= m_CameraMoveSpeed * tstep;
-		else if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_RIGHT))
-			m_CameraPosition.x += m_CameraMoveSpeed * tstep;
+				m_CameraPosition.x -= m_CameraMoveSpeed * tstep;
+			else if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_RIGHT))
+				m_CameraPosition.x += m_CameraMoveSpeed * tstep;
 
-		if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_UP))
-			m_CameraPosition.y += m_CameraMoveSpeed * tstep;
-		else if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_DOWN))
-			m_CameraPosition.y -= m_CameraMoveSpeed * tstep;
+			if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_UP))
+				m_CameraPosition.y += m_CameraMoveSpeed * tstep;
+			else if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_DOWN))
+				m_CameraPosition.y -= m_CameraMoveSpeed * tstep;
 
-		if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_A))
-			m_CameraRotation += m_CameraRotationSpeed * tstep;
-		if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_D))
-			m_CameraRotation -= m_CameraRotationSpeed * tstep;
+			if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_A))
+				m_CameraRotation += m_CameraRotationSpeed * tstep;
+			if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_D))
+				m_CameraRotation -= m_CameraRotationSpeed * tstep;
 
-		Combo::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-		Combo::RenderCommand::Clear();
+			Combo::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+			Combo::RenderCommand::Clear();
 
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.SetRotation(m_CameraRotation);
+			m_Camera.SetPosition(m_CameraPosition);
+			m_Camera.SetRotation(m_CameraRotation);
 
-		Combo::RenderManager::BeginScene(m_Camera);
+			Combo::RenderManager::BeginScene(m_Camera);
 
-		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-		std::dynamic_pointer_cast<Combo::OpenGLShader>(m_FlatColorShader)->Bind();
-		std::dynamic_pointer_cast<Combo::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
+			std::dynamic_pointer_cast<Combo::OpenGLShader>(m_FlatColorShader)->Bind();
+			std::dynamic_pointer_cast<Combo::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
 
-		for (int y = 0; y < 20; y++)
-		{
-			for (int x = 0; x < 20; x++)
+			for (int y = 0; y < 20; y++)
 			{
-				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
-				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-				Combo::RenderManager::Submit(m_FlatColorShader, m_SquareVA, transform);
+				for (int x = 0; x < 20; x++)
+				{
+					glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
+					glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+					Combo::RenderManager::Submit(m_FlatColorShader, m_SquareVA, transform);
+				}
 			}
-		}
 
-		Combo::RenderManager::Submit(m_Shader, m_VertexArray);
+			Combo::RenderManager::Submit(m_Shader, m_VertexArray);
 
-		Combo::RenderManager::EndScene();
+			Combo::RenderManager::EndScene();
         }
         virtual void ImGuiRender() override
         {
@@ -184,7 +194,7 @@ class SandboxLayer : public Combo::Layer
         float m_CameraRotation = 0.0f;
         float m_CameraRotationSpeed = 180.0f;
 
-        glm::vec3 m_SquareColor = { 0.1f, 0.3f, 0.8f };
+        glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };
 
 

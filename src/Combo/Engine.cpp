@@ -15,8 +15,7 @@ namespace Combo
     Engine::Engine()
     {
         if(s_Instance)COMBO_ERROR_LOG("Application already exists!");
-
-        s_Instance = this;
+		s_Instance = this;
 
         m_Window = std::unique_ptr<Window>(Window::Create());
         m_Window->SetEventCallback(BIND_FN(OnEvent));
