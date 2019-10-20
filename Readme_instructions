@@ -17,4 +17,6 @@ make
 Check premake-wiki for more information
 url: https://github.com/premake/premake-core/wiki/
 
+stb_image:: https://github.com/nothings/stb
+
 

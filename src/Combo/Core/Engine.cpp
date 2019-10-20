@@ -19,6 +19,8 @@ namespace Combo
 
         m_Window = std::unique_ptr<Window>(Window::Create());
         m_Window->SetEventCallback(BIND_FN(OnEvent));
+        
+        RenderManager::Init();
 
         m_ImGuiLayer = new ImGuiLayer();
         PushOverLay(m_ImGuiLayer);
