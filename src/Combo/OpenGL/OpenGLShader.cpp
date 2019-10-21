@@ -1,94 +1,164 @@
 #include "combopch.h"
 
 #include "OpenGLShader.h"
-
+#include <fstream>
 #include "glad/glad.h"
 #include "glm/gtc/type_ptr.hpp"
 
 namespace Combo
 {
-    OpenGLShader::OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource)
+    static GLenum ShaderTypeFromString(const std::string& type)
     {
-        //Vertex Shader Handler
-        GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-        const GLchar* source = vertexSource.c_str();
-        glShaderSource(vertexShader, 1, &source, 0);
-        glCompileShader(vertexShader);
-        
-        GLint compiled = 0;
-        glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &compiled);
-        if (compiled == GL_FALSE)
-        {
-            GLint maximumLength = 0;
-            glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maximumLength);
+        if(type == "vertex")
+            return GL_VERTEX_SHADER;
+        if(type == "fragment" || type == "pixel")
+            return GL_FRAGMENT_SHADER;
 
-            std::vector<GLchar> infoLog(maximumLength);
-            glGetShaderInfoLog(vertexShader, maximumLength, &maximumLength, &infoLog[0]);
+        COMBO_ERROR_LOG("Unknown Shader type!");
+        return 0;
+    }
 
-            glDeleteShader(vertexShader);
+    OpenGLShader::OpenGLShader(const std::string& filepath)
+    {
+       std::string source = ReadFile(filepath);
+       auto shaderSource = PreProcess(source);
+       Compile(shaderSource);
 
-            COMBO_ERROR_LOG("{0}", infoLog.data());
-            COMBO_ERROR_LOG("Vertex shader failed to compile!");
-            return;
-        }
-        
+       //parsing shader name from filepath
 
-        //Fragment Shader Handler
-        GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-        source = fragmentSource.c_str();
-        glShaderSource(fragmentShader, 1, &source, 0);
-        glCompileShader(fragmentShader);
+        auto lastSlash = filepath.find_last_of("/\\");
+        lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+        auto lastDot = filepath.rfind('.');
+        auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
+        m_Name = filepath.substr(lastSlash, count);
 
-        glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &compiled);
-        if (compiled == GL_FALSE)
-        {
-            GLint maximumLength = 0;
-            glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maximumLength);
-
-            std::vector<GLchar> infoLog(maximumLength);
-            glGetShaderInfoLog(fragmentShader, maximumLength, &maximumLength, &infoLog[0]);
-
-            glDeleteShader(fragmentShader);
-            glDeleteShader(vertexShader);
-
-            COMBO_ERROR_LOG("{0}", infoLog.data());
-            COMBO_ERROR_LOG("Fragment shader failed to compile!");
-            return;
-        }
-
-        m_RendererID = glCreateProgram();
-        GLint program = m_RendererID;
-
-        glAttachShader(program, vertexShader);
-        glAttachShader(program, fragmentShader);
-
-        glLinkProgram(program);
-
-        GLint linked = 0;
-        glGetProgramiv(program, GL_LINK_STATUS, &linked);
-        if(linked == GL_FALSE)
-        {
-            GLint maximumLength = 0;
-            glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maximumLength);
-
-            std::vector<GLchar> infoLog(maximumLength);
-            glGetProgramInfoLog(program, maximumLength, &maximumLength, &infoLog[0]);
-
-            glDeleteProgram(program);
-            glDeleteShader(fragmentShader);
-            glDeleteShader(vertexShader);
-
-            COMBO_ERROR_LOG("{0}", infoLog.data());
-            COMBO_ERROR_LOG("Shader Program failed to link!");
-            return;
-        }
-        glDetachShader(program, vertexShader);
-        glDetachShader(program, fragmentShader);
+    }
+    OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+    : m_Name(name)
+    {
+        std::unordered_map<GLenum, std::string> sources;
+        sources[GL_VERTEX_SHADER] = vertexSrc;
+        sources[GL_FRAGMENT_SHADER] = fragmentSrc;
+        Compile(sources);
     }
     OpenGLShader::~OpenGLShader()
     {
         glDeleteProgram(m_RendererID);
     }
+    std::string OpenGLShader::ReadFile(const std::string& filepath)
+    {
+        std::string result; 
+        std::ifstream in(filepath, std::ios::in | std::ios::binary);
+        if(in)
+        {
+            in.seekg(0, std::ios::end);
+            result.resize(in.tellg());
+            in.seekg(0, std::ios::beg);
+            in.read(&result[0], result.size());
+            in.close();
+        }
+        else
+        {
+            COMBO_ERROR_LOG("Cannot open file '{0}'!", filepath);
+        }
+        return result;
+
+    }
+    std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source)
+    {
+        std::unordered_map<GLenum, std::string> shaderSources;
+        
+        const char* typeToken = "#type";
+        size_t typeTokenLength = strlen(typeToken);
+        size_t position = source.find(typeToken, 0);
+
+        while(position != std::string::npos)
+        {
+            size_t endOfLine = source.find_first_of("\r\n", position);
+            if(endOfLine == std::string::npos) COMBO_ERROR_LOG("Syntax error!");
+            size_t begin = position + typeTokenLength + 1;
+            std::string type = source.substr(begin, endOfLine - begin);
+            if(ShaderTypeFromString(type)) COMBO_ERROR_LOG("Invalid Shader type!");
+
+            size_t nextLinePos = source.find_first_not_of("\r\n", endOfLine);
+            position = source.find(typeToken, nextLinePos);
+            shaderSources[ShaderTypeFromString(type)] = 
+                            source.substr(nextLinePos, position - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
+        }
+
+        return shaderSources;
+    }
+    void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
+    {
+        GLuint program = glCreateProgram();
+        if(shaderSources.size() <= 2) COMBO_ERROR_LOG("Only 2 shaders supported for now!");
+        std::array<GLenum, 2> glShaderIDs;
+        int glShaderIDIndex = 0;
+        
+        for(auto& keyValue : shaderSources)
+        {
+            GLenum type = keyValue.first;
+            const std::string& source = keyValue.second;
+
+            GLuint shader = glCreateShader(type);
+
+            const GLchar* sourceCstr = source.c_str();
+            glShaderSource(shader, 1, &sourceCstr, 0);
+
+            glCompileShader(shader);
+
+            GLint isCompiled = 0;
+            glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
+            if(isCompiled == GL_FALSE)
+            {
+                GLint maxLength = 0;
+				glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
+
+				std::vector<GLchar> infoLog(maxLength);
+				glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
+
+				glDeleteShader(shader);
+
+                COMBO_ERROR_LOG("{0}", infoLog.data());
+                COMBO_ERROR_LOG("Shader compilation failure!");
+
+				break;
+            }
+
+            glAttachShader(program, shader);
+			glShaderIDs[glShaderIDIndex++] = shader;
+        }
+        m_RendererID = program;
+
+        glLinkProgram(program);
+
+        GLint isLinked = 0;
+        glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);
+        if(isLinked == GL_FALSE)
+        {
+            GLint maxLength = 0;
+			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+
+			std::vector<GLchar> infoLog(maxLength);
+			glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
+
+			glDeleteProgram(program);
+			
+			for (auto id : glShaderIDs)
+				glDeleteShader(id);
+
+            COMBO_ERROR_LOG("{0}", infoLog.data());
+            COMBO_ERROR_LOG("Shader link failure!");
+
+			return;
+        }
+
+        for(auto id : glShaderIDs)
+        {
+            glDetachShader(program, id);
+        }
+    }
+
     void OpenGLShader::Bind() const
     {
         glUseProgram(m_RendererID);
