@@ -128,26 +128,9 @@ class SandboxLayer : public Combo::Layer
         void Update(Combo::Timestep tstep) override
         {
             CLIENT_INFO_LOG("Sandbox::Update");
-            if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_LEFT))
-				m_CameraPosition.x -= m_CameraMoveSpeed * tstep;
-			else if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_RIGHT))
-				m_CameraPosition.x += m_CameraMoveSpeed * tstep;
-
-			if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_UP))
-				m_CameraPosition.y += m_CameraMoveSpeed * tstep;
-			else if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_DOWN))
-				m_CameraPosition.y -= m_CameraMoveSpeed * tstep;
-
-			if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_A))
-				m_CameraRotation += m_CameraRotationSpeed * tstep;
-			if (Combo::InputManagerGLFW::IsKeyPressed(Combo::KeyboardKey::KEY_D))
-				m_CameraRotation -= m_CameraRotationSpeed * tstep;
-
+           
 			Combo::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 			Combo::RenderCommand::Clear();
-
-			m_Camera.SetPosition(m_CameraPosition);
-			m_Camera.SetRotation(m_CameraRotation);
 
 			Combo::RenderManager::BeginScene(m_Camera);
 
