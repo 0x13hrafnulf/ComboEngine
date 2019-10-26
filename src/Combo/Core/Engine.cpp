@@ -35,6 +35,11 @@ namespace Combo
         {
             return this->WindowClose(e);
         });
+        dispatcher.DispatchEvent<WindowResizeEvent>([this](WindowResizeEvent& e)
+        {
+            return this->WindowResize(e);
+        });
+
 
         for(auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
         {
@@ -55,10 +60,12 @@ namespace Combo
             Timestep ts = time - m_LastFrame;
             m_LastFrame = time;
 
-
-            for(Layer* layer : m_LayerStack)
+            if(!m_Minimized)
             {
-                layer->Update(ts);
+                for(Layer* layer : m_LayerStack)
+                {
+                    layer->Update(ts);
+                }
             }
 
             m_ImGuiLayer->Start();
@@ -88,5 +95,18 @@ namespace Combo
         m_Running = false;
         return true;
     }
+    bool Engine::WindowResize(WindowResizeEvent& event)
+    {
+       if(event.GetWidth() == 0 || event.GetHeight() == 0)
+       {
+           m_Minimized = true;
+           return false;
+       }
 
+        m_Minimized = false;
+        RenderManager::OnWindowResize((event.GetWidth(), event.GetHeight());
+
+
+       return false;
+    }
 }

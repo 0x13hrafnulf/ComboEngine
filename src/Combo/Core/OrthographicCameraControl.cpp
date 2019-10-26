@@ -42,13 +42,22 @@ namespace Combo
     void OrthographicCameraControl::OnEvent(Event& e)
     {
         EventManager dispatcher;
-        dispatcher.DispatchEvent<MouseScrolledEvent>([this](OrthographicCameraControl::OnMouseControl);
-        
+        dispatcher.DispatchEvent<MouseScrolledEvent>([this](MouseScrolledEvent& e)
+        {
+            return this->MouseControl(e);
+        });
+        dispatcher.DispatchEvent<WindowResizeEvent>([this](WindowResizeEvent& e)
+        {
+            return this->WindowResize(e);
+        });
+
+        //dispatcher.DispatchEvent<MouseScrolledEvent>([this](WindowResizeEvent& e);
+        //dispatcher.DispatchEvent<WindowResizeEvent>([this](WindowResizeEvent& e);
     }
 
-    bool OrthographicCameraControl::OnMouseControl(MouseScrolledEvent& e)
+    bool OrthographicCameraControl::MouseControl(MouseScrolledEvent& event)
     {
-        m_ZoomLevel -= e.GetYOffset() * 0.25f;
+        m_ZoomLevel -= event.GetYOffset() * 0.25f;
         m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
         m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel,
                                 m_AspectRatio * m_ZoomLevel,
@@ -56,4 +65,15 @@ namespace Combo
                                 m_ZoomLevel);
         return false;
     }
+
+     bool OrthographicCameraControl::WindowResize(WindowResizeEvent& event)
+     {
+        m_AspectRatio = (float)event.GetWidth() / (float)event.GetHeight();
+        m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel,
+                                m_AspectRatio * m_ZoomLevel,
+                                -m_ZoomLevel,
+                                m_ZoomLevel);
+
+        return false;
+     }
 }   

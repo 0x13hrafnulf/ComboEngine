@@ -29,8 +29,11 @@ namespace Combo
             inline static Engine& Get() { return *s_Instance; }
 
        private:
-            bool WindowClose(WindowCloseEvent& event);   
+            bool WindowClose(WindowCloseEvent& event);
+            bool WindowResize(WindowResizeEvent& event);
+
             bool m_Running = true;
+            bool m_Minimized = false;
             std::unique_ptr<Window> m_Window;
             LayerStack m_LayerStack;
             ImGuiLayer* m_ImGuiLayer;   
