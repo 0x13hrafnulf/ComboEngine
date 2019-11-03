@@ -81,6 +81,8 @@ namespace Combo
             if(ShaderTypeFromString(type)) COMBO_ERROR_LOG("Invalid Shader type!");
 
             size_t nextLinePos = source.find_first_not_of("\r\n", endOfLine);
+            if(nextLinePos == std::string::npos) COMBO_ERROR_LOG("Syntax Error!");
+
             position = source.find(typeToken, nextLinePos);
             shaderSources[ShaderTypeFromString(type)] = 
                             source.substr(nextLinePos, position - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
@@ -156,6 +158,7 @@ namespace Combo
         for(auto id : glShaderIDs)
         {
             glDetachShader(program, id);
+            glDeleteShader(id);
         }
     }
 

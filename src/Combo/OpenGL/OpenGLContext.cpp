@@ -26,6 +26,7 @@ namespace Combo
         COMBO_INFO_LOG("   Vendor: {0}", glGetString(GL_VENDOR));
         COMBO_INFO_LOG("   Renderer: {0}", glGetString(GL_RENDERER));
         COMBO_INFO_LOG("   Version: {0}", glGetString(GL_VERSION));
+        
     }
     void OpenGLContext::SwapBuffers() 
     {

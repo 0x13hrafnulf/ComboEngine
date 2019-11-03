@@ -7,7 +7,7 @@
 
 namespace Combo {
     
-    InputManager* InputManager::s_Instance = new InputManagerGLFW();
+    std::unique_ptr<InputManager> InputManager::s_Instance = std::make_unique<InputManagerGLFW>();
 
     bool InputManagerGLFW::IsKeyPressedImpl(KeyboardKey key)
     {

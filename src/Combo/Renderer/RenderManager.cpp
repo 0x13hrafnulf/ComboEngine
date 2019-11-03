@@ -1,14 +1,16 @@
 #include "combopch.h"
 #include "RenderManager.h"
+#include "Renderer2D.h"
 
 #include "../OpenGL/OpenGLShader.h"
 
 namespace Combo
 {
-    RenderManager::SceneData* RenderManager::s_SceneData = new RenderManager::SceneData;
+    std::unique_ptr<RenderManager::SceneData> RenderManager::s_SceneData = std::make_unique<RenderManager::SceneData>();
     void RenderManager::Init()
     {
         RenderCommand::Init();
+        Renderer2D::Init();
     }
     void RenderManager::BeginScene(OrthographicCamera& camera)
     {

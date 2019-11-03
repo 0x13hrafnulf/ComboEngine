@@ -6,12 +6,12 @@
 
 namespace Combo
 {
-    VertexArray* VertexArray::Create()
+    std::shared_ptr<VertexArray>  VertexArray::Create()
     {
         switch(RenderManager::GetAPI())
         {
             case RendererAPI::API::NONE: COMBO_ERROR_LOG("RendererAPI is not supported!"); return nullptr;
-            case RendererAPI::API::OpenGL: return new OpenGLVertexArray();
+            case RendererAPI::API::OpenGL: return std::make_shared<OpenGLVertexArray>();
             default: COMBO_ERROR_LOG("Unknown RenderAPI!"); return nullptr;
         }
         COMBO_ERROR_LOG("Unknown RenderAPI!");

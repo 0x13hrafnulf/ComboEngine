@@ -23,7 +23,7 @@ namespace Combo
 
 
 
-        static VertexArray* Create();
+        static std::shared_ptr<VertexArray> Create();
 
     };
 }

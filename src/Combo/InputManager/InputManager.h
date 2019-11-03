@@ -33,11 +33,13 @@ namespace Combo {
             {
                  return s_Instance->GetMousePositionImpl().second;
             }
-
+            InputManager(const InputManager&) = delete;
+		    InputManager& operator=(const InputManager&) = delete;
+            
             // inline static bool IsKeyReleased(KeyboardKey key);
             // inline static bool IsKeyDown(KeyboardKey key);
         private:
-            static InputManager* s_Instance;
+            static std::unique_ptr<InputManager> s_Instance;
         protected:
             InputManager() = default;
 

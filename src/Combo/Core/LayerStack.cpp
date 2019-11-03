@@ -10,7 +10,10 @@ namespace Combo
     LayerStack::~LayerStack()
     {
         for(Layer* layer : m_Layers)
+        {
+            layer->Detach();
             delete layer;
+        }
     }
 
     void LayerStack::PushLayer(Layer* layer)

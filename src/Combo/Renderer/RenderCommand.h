@@ -29,7 +29,7 @@ namespace Combo
                 s_RendererAPI->DrawIndexed(vertexArray);
             }
         private:
-            static RendererAPI* s_RendererAPI;
+            static std::unique_ptr<RendererAPI> s_RendererAPI;
 
     };
 }

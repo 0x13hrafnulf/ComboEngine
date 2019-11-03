@@ -9,7 +9,8 @@
 
 namespace Combo {
 
-    static bool s_GLFWInitialized = false;
+    static uint8_t s_GLFWWindowCount = 0;
+	
 
 	static void ErrorCallback(int error, const char* info)
     {
@@ -41,15 +42,15 @@ namespace Combo {
 
 
         // Setup GLFW
-        if(!s_GLFWInitialized)
+        if(s_GLFWWindowCount == 0)
         {
+			COMBO_INFO_LOG("Initializing GLFW!");
             int success = glfwInit();
             if(!success) 
             {
                 COMBO_ERROR_LOG("GLFW initialization failed!");
                 glfwSetErrorCallback(ErrorCallback);
             }
-            s_GLFWInitialized = true;
         }
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
@@ -57,7 +58,8 @@ namespace Combo {
 
         // Create window with graphics context
         m_Window = glfwCreateWindow((int)attribs.Width, (int)attribs.Height, attribs.Title.c_str(), nullptr, nullptr);
-		m_Context = new OpenGLContext(m_Window);
+		++s_GLFWWindowCount;
+		m_Context = std::make_unique<OpenGLContext>(m_Window);
 		m_Context->Init();
 		glfwSetWindowUserPointer(m_Window, &m_Properties);		
         SetVsync(true);
@@ -167,6 +169,11 @@ namespace Combo {
     void WindowGLFW::Shutdown()
     {
         glfwDestroyWindow(m_Window);
+		if (--s_GLFWWindowCount == 0)
+		{
+			COMBO_INFO_LOG("Terminating GLFW!");
+			glfwTerminate();
+		}
     }
 
     void WindowGLFW::SetVsync(bool enabled)

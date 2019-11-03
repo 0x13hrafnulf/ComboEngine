@@ -45,10 +45,10 @@ namespace Combo
         std::string m_Name;
         ShaderDataType m_Type;
         uint32_t m_Size;
-        uint32_t m_Offset;
+        size_t m_Offset;
         bool m_Normalized;
         //
-        BufferElement() {}
+        BufferElement() = default;
 
         BufferElement(ShaderDataType type,const std::string& name, bool normalized = false)
         : m_Name(name),
@@ -107,7 +107,7 @@ namespace Combo
 
             void CalculateStrideAndOffset()
             {
-                uint32_t offset = 0;
+                size_t offset = 0;
                 m_Stride = 0;
 
                 for (auto& element : m_BufferElements)

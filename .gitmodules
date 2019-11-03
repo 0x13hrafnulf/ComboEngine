@@ -1,13 +1,16 @@
 [submodule "libs/spdlog"]
 	path = libs/spdlog
 	url = https://github.com/gabime/spdlog
+	branch = v1.x
 [submodule "libs/glm"]
 	path = libs/glm
 	url = https://github.com/g-truc/glm
-
+	branch = master
 [submodule "libs/imgui"]
 	path = libs/imgui
 	url = https://github.com/umarbaevB/imgui/
+	branch = docking
 [submodule "libs/glfw"]
 	path = libs/glfw
 	url = https://github.com/umarbaevB/glfw
+	branch = master
