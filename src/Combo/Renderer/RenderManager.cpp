@@ -1,12 +1,13 @@
-#include "combopch.h"
+#include "Combo/combopch.h"
 #include "RenderManager.h"
 #include "Renderer2D.h"
 
-#include "../OpenGL/OpenGLShader.h"
+#include "Combo/OpenGL/OpenGLShader.h"
 
 namespace Combo
 {
     std::unique_ptr<RenderManager::SceneData> RenderManager::s_SceneData = std::make_unique<RenderManager::SceneData>();
+
     void RenderManager::Init()
     {
         RenderCommand::Init();

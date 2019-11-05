@@ -4,7 +4,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "Renderer/GraphicsContext.h"
+#include "Combo/Renderer/GraphicsContext.h"
 
 namespace Combo
 {  

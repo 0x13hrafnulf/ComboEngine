@@ -1,7 +1,6 @@
 #pragma once
 
-
-#include "../InputCodes.h"
+#include "Combo/Core/InputCodes.h"
 
 namespace Combo {
 
@@ -33,9 +32,7 @@ namespace Combo {
             {
                  return s_Instance->GetMousePositionImpl().second;
             }
-            InputManager(const InputManager&) = delete;
-		    InputManager& operator=(const InputManager&) = delete;
-            
+
             // inline static bool IsKeyReleased(KeyboardKey key);
             // inline static bool IsKeyDown(KeyboardKey key);
         private:

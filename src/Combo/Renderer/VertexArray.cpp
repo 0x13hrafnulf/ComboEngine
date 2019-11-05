@@ -1,8 +1,8 @@
-#include "combopch.h"
+#include "Combo/combopch.h"
 
 #include "VertexArray.h"
 #include "RenderManager.h"
-#include "../OpenGL/OpenGLVertexArray.h"
+#include "Combo/OpenGL/OpenGLVertexArray.h"
 
 namespace Combo
 {

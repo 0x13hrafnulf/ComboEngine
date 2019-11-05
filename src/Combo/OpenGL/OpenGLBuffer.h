@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderer/Buffer.h"
+#include "Combo/Renderer/Buffer.h"
 
 namespace Combo
 {

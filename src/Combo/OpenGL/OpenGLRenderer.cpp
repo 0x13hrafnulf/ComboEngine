@@ -1,8 +1,8 @@
-#include "combopch.h"
+#include "Combo/combopch.h"
 #include "OpenGLRenderer.h"
 
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 
 
 namespace Combo

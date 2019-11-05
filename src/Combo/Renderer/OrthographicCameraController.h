@@ -1,17 +1,18 @@
 #pragma once
 
-#include "Combo/Renderer/OrthographicCamera.h"
+#include "OrthographicCamera.h"
+
 #include "Combo/Core/Timestep.h"
-#include "Combo/InputManager/WindowEvent.h"
-#include "Combo/InputManager/MouseEvent.h"
+#include "Combo/Core/InputManager/WindowEvent.h"
+#include "Combo/Core/InputManager/MouseEvent.h"
 
 
 namespace Combo
 {
-    class OrthographicCameraControl
+    class OrthographicCameraController
     {
         public:
-            OrthographicCameraControl(float aspectRatio, bool rotate = false);
+            OrthographicCameraController(float aspectRatio, bool rotate = false);
 
             void Update(Timestep ts);
             void OnEvent(Event& e);

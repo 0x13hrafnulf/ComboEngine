@@ -1,7 +1,9 @@
 #pragma once
 
-#include "../Renderer/Shader.h"
-#include "glm/glm.hpp"
+#include "Combo/Renderer/Shader.h"
+#include <glm/glm.hpp>
+
+typedef unsigned int GLenum;
 
 namespace Combo
 {

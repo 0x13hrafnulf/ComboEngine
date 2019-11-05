@@ -1,11 +1,11 @@
-#include "combopch.h"
+#include "Combo/combopch.h"
 #include "WindowGLFW.h"
 
 #include "InputManager/WindowEvent.h"
 #include "InputManager/KeyboardEvent.h"
 #include "InputManager/MouseEvent.h"
 
-#include "OpenGL/OpenGLContext.h"
+#include "Combo/OpenGL/OpenGLContext.h"
 
 namespace Combo {
 

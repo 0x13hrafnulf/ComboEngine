@@ -1,4 +1,5 @@
 #pragma once
+
 #include "InputManager/InputManager.h"
 #include "InputCodes.h"
 namespace Combo {

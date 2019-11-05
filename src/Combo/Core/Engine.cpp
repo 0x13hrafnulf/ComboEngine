@@ -1,16 +1,23 @@
-#include "combopch.h"
+#include "Combo/combopch.h"
 
 #include "Engine.h"
 #include "LogManager.h"
 #include "InputManager/EventManager.h"
-#include "GLFW/glfw3.h"
+#include "InputManager/InputManager.h"
+#include <GLFW/glfw3.h>
+
+#include "Combo/Renderer/RenderManager.h"
+
 
 namespace Combo
 {
+
+//Need to find a lambda way to do it
+#define BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
     Engine* Engine::s_Instance = nullptr;
 
-    //Need to find a lambda way to do it
-#define BIND_FN(x) std::bind(&Engine::x, this, std::placeholders::_1)
+
 
     Engine::Engine()
     {
@@ -18,7 +25,7 @@ namespace Combo
 		s_Instance = this;
 
         m_Window = std::unique_ptr<Window>(Window::Create());
-        m_Window->SetEventCallback(BIND_FN(OnEvent));
+        m_Window->SetEventCallback(BIND_EVENT_FN(Engine::OnEvent));
         
         RenderManager::Init();
 
@@ -27,24 +34,17 @@ namespace Combo
 
     }
 
-    void Engine::OnEvent(Event& event)
+    void Engine::OnEvent(Event& e)
     {
-        EventManager dispatcher(event);
+        EventManager dispatcher(e);
 
-        dispatcher.DispatchEvent<WindowCloseEvent>([this](WindowCloseEvent& e)
-        {
-            return this->WindowClose(e);
-        });
-        dispatcher.DispatchEvent<WindowResizeEvent>([this](WindowResizeEvent& e)
-        {
-            return this->WindowResize(e);
-        });
-
+		dispatcher.DispatchEvent<WindowCloseEvent>(BIND_EVENT_FN(Engine::WindowClose));
+		dispatcher.DispatchEvent<WindowResizeEvent>(BIND_EVENT_FN(Engine::WindowResize));
 
         for(auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
         {
-            (*--it)->OnEvent(event);
-            if(event.Handled)
+            (*--it)->OnEvent(e);
+            if(e.Handled)
                 break;
         }
 
@@ -104,7 +104,7 @@ namespace Combo
        }
 
         m_Minimized = false;
-        RenderManager::OnWindowResize((event.GetWidth(), event.GetHeight());
+        RenderManager::WindowResize(event.GetWidth(), event.GetHeight());
 
 
        return false;

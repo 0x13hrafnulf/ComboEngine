@@ -1,4 +1,4 @@
-#include "combopch.h"
+#include "Combo/combopch.h"
 #include "ImGuiLayer.h"
 #include "imgui.h"
 #include "examples/imgui_impl_glfw.h"
@@ -6,10 +6,10 @@
 
 
 
-#include "Engine.h"
+#include "Combo/Core/Engine.h"
 
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 namespace Combo
 {

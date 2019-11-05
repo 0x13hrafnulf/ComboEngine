@@ -20,7 +20,7 @@ IncludeDir["GLAD"] = "libs/glad/include"
 IncludeDir["ImGui"] = "libs/imgui"
 IncludeDir["GLM"] = "libs/glm"
 IncludeDir["GLFW"] = "libs/glfw/include"
-
+IncludeDir["stb_image"] = "libs/stb_image"
 
 
 group "Dependencies"
@@ -50,21 +50,22 @@ project "Combo"
     {
         "src/%{prj.name}/**.h",
         "src/%{prj.name}/**.cpp",
+        "libs/stb_image/**.h",
+		"libs/stb_image/**.cpp",
         "libs/glm/glm/**.hpp",
         "libs/glm/glm/**.inl"
     }
     
-    removefiles("src/%{prj.name}/not_used/**")
-    
     includedirs
     {
-        "src/%{prj.name}/",
+        "src/",
         "libs/spdlog/include/",
         "libs/",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.GLAD}",
         "%{IncludeDir.ImGui}",
-        "%{IncludeDir.GLM}"
+        "%{IncludeDir.GLM}",
+        "%{IncludeDir.stb_image}"
     }
     links 
     {
@@ -131,7 +132,6 @@ project "Application"
     {
         "src/%{prj.name}/",
         "src/",
-        "src/Combo/",
         "libs/spdlog/include/",
         "libs/",
         "%{IncludeDir.GLM}",

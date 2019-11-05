@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Renderer/Texture.h"
+#include "Combo/Renderer/Texture.h"
 
 
 namespace Combo

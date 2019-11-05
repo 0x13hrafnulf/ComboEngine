@@ -1,7 +1,7 @@
-#include "combopch.h"
+#include "Combo/combopch.h"
 #include "Buffer.h"
 #include "RenderManager.h"
-#include "../OpenGL/OpenGLBuffer.h"
+#include "Combo/OpenGL/OpenGLBuffer.h"
 
 namespace Combo
 {

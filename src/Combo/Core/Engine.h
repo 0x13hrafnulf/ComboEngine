@@ -4,7 +4,7 @@
 #include "InputManager/Event.h"
 #include "InputManager/WindowEvent.h"
 #include "LayerStack.h"
-#include "UI/ImGuiLayer.h"
+#include "Combo/UI/ImGuiLayer.h"
 #include "Timestep.h"
 
 namespace Combo
@@ -31,10 +31,10 @@ namespace Combo
        private:
             bool WindowClose(WindowCloseEvent& event);
             bool WindowResize(WindowResizeEvent& event);
-
+            std::unique_ptr<Window> m_Window;
             bool m_Running = true;
             bool m_Minimized = false;
-            std::unique_ptr<Window> m_Window;
+    
             LayerStack m_LayerStack;
             ImGuiLayer* m_ImGuiLayer;   
             Timestep m_LastFrame = 0.0f;

@@ -1,9 +1,9 @@
-#include "combopch.h"
+#include "Combo/combopch.h"
 #include "Texture.h"
 
 
 #include "RenderManager.h"
-#include "../OpenGL/OpenGLTexture.h"
+#include "Combo/OpenGL/OpenGLTexture.h"
 
 namespace Combo
 {

@@ -1,7 +1,7 @@
-#include "combopch.h"
+#include "Combo/combopch.h"
 #include "OpenGLTexture.h"
 
-#include "stb_image.h"
+#include <stb_image.h>
 
 #include <glad/glad.h>
 
@@ -49,7 +49,7 @@ namespace Combo
     }
 
     
-    void OpenGLTexture2D::Bind(uint32_t slot = 0) const
+    void OpenGLTexture2D::Bind(uint32_t slot) const
     {
         glBindTextureUnit(slot, m_RendererID);
     }
