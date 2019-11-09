@@ -62,8 +62,8 @@ namespace Combo
 
     void ImGuiLayer::ImGuiRender()
     {
-        static bool show_demo_window = true;
-        ImGui::ShowDemoWindow(&show_demo_window);
+        //static bool show_demo_window = true;
+        //ImGui::ShowDemoWindow(&show_demo_window);
     }
     
     void ImGuiLayer::Start()

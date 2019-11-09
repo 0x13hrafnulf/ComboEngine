@@ -24,6 +24,8 @@ class ApplicationLayer : public Combo::Layer
 	// Temp
     	std::shared_ptr<Combo::VertexArray> m_SquareVA;
     	std::shared_ptr<Combo::Shader> m_FlatColorShader;
+        std::shared_ptr<Combo::Texture2D> m_GridTexture;
 
-	    glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
+
+	    glm::vec4 m_GridColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };

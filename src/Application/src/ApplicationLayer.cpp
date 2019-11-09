@@ -15,7 +15,7 @@ ApplicationLayer::ApplicationLayer()
 
 void ApplicationLayer::Attach()
 {
-
+	m_GridTexture = Combo::Texture2D::Create("assets/textures/pngfind.com-grid-png-601092.png");
 }
 void ApplicationLayer::Detach()
 {
@@ -28,15 +28,29 @@ void ApplicationLayer::Update(Combo::Timestep ts)
 	// Render
 	Combo::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	Combo::RenderCommand::Clear();
-
 	Combo::Renderer2D::BeginScene(m_CameraController.GetCamera());
+
+	float xoffset, yoffset = 0;
+	for (int y = 0; y < 30; y++)
+	{
+		for (int x = 0; x < 30; x++)
+		{
+			glm::vec3 pos(x * 0.11f, y * 0.11f, -0.1f);
+			Combo::Renderer2D::DrawQuad(pos, {1.0f/10.0f, 1.0f/10.0f}, m_GridColor);
+		}
+	}
+
+	
 	Combo::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+	Combo::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
+	Combo::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 10.0f, 10.0f }, m_GridTexture);
 	Combo::Renderer2D::EndScene();
 }
 void ApplicationLayer::ImGuiRender() 
 {
+	
     ImGui::Begin("Settings");
-    ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+    ImGui::ColorEdit3("Grid Color", glm::value_ptr(m_GridColor));
     ImGui::End();
 }
 void ApplicationLayer::OnEvent(Combo::Event& e)

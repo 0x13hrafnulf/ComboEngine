@@ -78,14 +78,14 @@ namespace Combo
             if(endOfLine == std::string::npos) COMBO_ERROR_LOG("Syntax error!");
             size_t begin = position + typeTokenLength + 1;
             std::string type = source.substr(begin, endOfLine - begin);
-            if(ShaderTypeFromString(type)) COMBO_ERROR_LOG("Invalid Shader type!");
+            if(!ShaderTypeFromString(type)) COMBO_ERROR_LOG("Invalid Shader type!");
 
             size_t nextLinePos = source.find_first_not_of("\r\n", endOfLine);
             if(nextLinePos == std::string::npos) COMBO_ERROR_LOG("Syntax Error!");
 
             position = source.find(typeToken, nextLinePos);
-            shaderSources[ShaderTypeFromString(type)] = 
-                            source.substr(nextLinePos, position - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
+            shaderSources[ShaderTypeFromString(type)] = (position == std::string::npos) ? source.substr(nextLinePos) : source.substr(nextLinePos, position - nextLinePos);
+                            
         }
 
         return shaderSources;
@@ -93,7 +93,7 @@ namespace Combo
     void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
     {
         GLuint program = glCreateProgram();
-        if(shaderSources.size() <= 2) COMBO_ERROR_LOG("Only 2 shaders supported for now!");
+        if(shaderSources.size() > 2) COMBO_ERROR_LOG("Only 2 shaders supported for now!");
         std::array<GLenum, 2> glShaderIDs;
         int glShaderIDIndex = 0;
         

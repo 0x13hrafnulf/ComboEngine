@@ -29,6 +29,7 @@ namespace Combo
     void OpenGLRenderer::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
     {
         glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 
 
