@@ -1,11 +1,25 @@
 
 #include "ApplicationLayer.h"
-#include <imgui/imgui.h>
 
+#include <imgui/imgui.h>
+#include "Combo/UI/ImGuiLayer.h"
+#include <imgui/imgui_internal.h>
 #include <Combo/OpenGL/OpenGLShader.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+static void ImGuiShowHelpMarker(const char* desc)
+{
+	ImGui::TextDisabled("(?)");
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::BeginTooltip();
+		ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+		ImGui::TextUnformatted(desc);
+		ImGui::PopTextWrapPos();
+		ImGui::EndTooltip();
+	}
+}
 
 
 ApplicationLayer::ApplicationLayer()
@@ -15,7 +29,7 @@ ApplicationLayer::ApplicationLayer()
 
 void ApplicationLayer::Attach()
 {
-	m_GridTexture = Combo::Texture2D::Create("assets/textures/pngfind.com-grid-png-601092.png");
+	m_GridTexture = Combo::Texture2D::Create("assets/textures/Checkerboard.png");
 }
 void ApplicationLayer::Detach()
 {
@@ -52,6 +66,8 @@ void ApplicationLayer::ImGuiRender()
     ImGui::Begin("Settings");
     ImGui::ColorEdit3("Grid Color", glm::value_ptr(m_GridColor));
     ImGui::End();
+
+
 }
 void ApplicationLayer::OnEvent(Combo::Event& e)
 {

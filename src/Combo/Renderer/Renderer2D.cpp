@@ -83,11 +83,11 @@ namespace Combo
         RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
     }
 
-    void DrawQuad(const glm::vec2& position,  const glm::vec2& size, const glm::vec4& color, const std::shared_ptr<Texture2D>& texture)
+    void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const std::shared_ptr<Texture2D>& texture)
     {
-        DrawQuad({ position.x, position.y, 0.0f }, size, color, texture);
+        DrawQuad({position.x, position.y, 0.0f}, size, texture);
     }
-    void DrawQuad(const glm::vec3& position,  const glm::vec2& size, const glm::vec4& color, const  std::shared_ptr<Texture2D>& texture)
+    void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const  std::shared_ptr<Texture2D>& texture)
     {
         s_Data->TextureShader->SetFloat4("u_Color", glm::vec4(1.0f));
         texture->Bind();

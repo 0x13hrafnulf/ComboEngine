@@ -5,7 +5,7 @@
 
 namespace Combo
 {
-  
+	
     OpenGLTexture2D::OpenGLTexture2D(const std::string& filepath)
     : m_Filepath(filepath)
     {
