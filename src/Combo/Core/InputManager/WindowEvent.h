@@ -40,7 +40,7 @@ namespace Combo
     class WindowCloseEvent : public Event
     {
         public:
-            WindowCloseEvent(){}
+            WindowCloseEvent() = default; 
 
              std::string ToString() const override
             {

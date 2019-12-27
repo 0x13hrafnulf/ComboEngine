@@ -23,7 +23,7 @@ namespace Combo
             virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) = 0;
 
             inline static API GetAPI() { return s_API; }
-            
+            static std::unique_ptr<RendererAPI> Create();
         private:
             static API s_API;
 

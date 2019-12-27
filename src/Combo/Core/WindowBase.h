@@ -42,7 +42,7 @@ namespace Combo
         virtual unsigned int GetWindowHeight() const = 0;
         virtual void* GetNativeWindow() const = 0;
      
-        static Window* Create(const WindowAttributes& attrib = WindowAttributes());
+        static std::unique_ptr<Window> Create(const WindowAttributes& attrib = WindowAttributes());
 
         virtual void SetEventCallback(const EventCallbackFunction& callback) = 0;
 

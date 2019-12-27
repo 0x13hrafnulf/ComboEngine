@@ -14,7 +14,7 @@ namespace Combo
    {
        public:
             Engine();
-            virtual ~Engine() = default;
+            virtual ~Engine();
 
             void Run();
             void OnEvent(Event& event);

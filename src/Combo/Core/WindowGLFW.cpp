@@ -17,9 +17,9 @@ namespace Combo {
         COMBO_ERROR_LOG("GLFWError[{0}]: {1}", error, info);
     }
 
-    Window* Window::Create(const WindowAttributes& attribs)
+    std::unique_ptr<Window> Window::Create(const WindowAttributes& attribs)
     {
-        return new WindowGLFW(attribs);
+        return std::make_unique<WindowGLFW>(attribs);
     }
 
     WindowGLFW::WindowGLFW(const WindowAttributes& attribs)
@@ -169,7 +169,8 @@ namespace Combo {
     void WindowGLFW::Shutdown()
     {
         glfwDestroyWindow(m_Window);
-		if (--s_GLFWWindowCount == 0)
+		--s_GLFWWindowCount;
+		if (s_GLFWWindowCount == 0)
 		{
 			COMBO_INFO_LOG("Terminating GLFW!");
 			glfwTerminate();
